@@ -11,12 +11,10 @@
               <router-link to="/home">Home</router-link>
             </b-nav-item>
             <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
-              <router-link
-                :to="{ name: 'Teams', params: { teams: this.teams, teamsId: this.teamsId } }"
-              >Teams</router-link>
+              <router-link :to="{ name: 'Teams', params: { teams: this.teams } }">Teams</router-link>
             </b-nav-item>
             <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
-              <router-link to="/matches">Matches</router-link>
+              <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">Matches</router-link>
             </b-nav-item>
             <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
               <router-link to="/more">More</router-link>
@@ -32,17 +30,12 @@
 
 
 <script>
-// import Teams from "./views/Teams";
-
 export default {
   name: "app",
-  components: {
-    // Teams
-  },
+  components: {},
   data() {
     return {
       teams: [],
-      teamsId: [],
       image: require("./assets/football-1406106_1920.jpg")
     };
   },
@@ -58,27 +51,6 @@ export default {
       }
     }
   },
-  methods: {
-    getTeamData: async function(teamID) {
-      let header = {
-        "X-Auth-Token": "a43af3a65b2b477c979e6b354684816b"
-      };
-      return fetch(`https://api.football-data.org/v2/teams/${teamID}`, {
-        headers: header
-      })
-        .then(response => {
-          if (response.ok) {
-            console.log("Request succeeded: " + response.statusText);
-            return response.json();
-          }
-          throw new Error(response.statusText);
-        })
-        .then(json => {
-          console.log(json);
-          // return json;
-        });
-    }
-  },
   created() {
     let url = "https://api.football-data.org/v2/competitions/CL/teams";
     let header = { "X-Auth-Token": "a43af3a65b2b477c979e6b354684816b" };
@@ -92,12 +64,14 @@ export default {
         throw new Error(response.statusText);
       })
       .then(json => {
-        let teamData = [];
-        // console.log(json.teams);
-        this.teams = json.teams;
-        let Id = this.teams.map(team => team.id);
-        this.teamsId = Id;
-        console.log(Id);
+        console.log("team", json);
+        this.teams = json.teams.sort((a, b) => {
+          let teamA = a.name.toLowerCase();
+          let teamB = b.name.toLowerCase();
+          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
+        });
+
+        // console.log(this.teams.map(o => o.name));
       })
       .catch(error => {
         console.log("Request failed: " + error.message);

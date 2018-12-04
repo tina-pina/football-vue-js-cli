@@ -119,6 +119,7 @@ h1 {
   color: firebrick;
   font-size: 60px;
 }
+
 .container {
   background-color: rgba(255, 255, 255, 0.7);
   color: darkblue;
