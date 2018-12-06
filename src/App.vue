@@ -76,21 +76,6 @@ export default {
       .catch(error => {
         console.log("Request failed: " + error.message);
       });
-
-    // return fetch("https://api.football-data.org/v2/teams/", { headers: header })
-    // .then(response => {
-    //   if (response.ok) {
-    //     console.log("Request succeeded: " + response.statusText);
-    //     return response.json();
-    //   }
-    //   throw new Error(response.statusText);
-    // })
-    // .then(json => {
-    //   console.log(json)
-    //   return json
-    // })
-    // .catch(error => {
-    // console.log("Request failed: " + error.message);
   }
 };
 </script>
