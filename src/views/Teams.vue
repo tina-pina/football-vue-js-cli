@@ -9,9 +9,11 @@
 
     <div class="container" v-if="teamSelected">
       <!-- team name and logo start -->
-      <div class="row teamNameLogo">
-        <div class="teamName col-6 d-flex align-items-center justify-content-center">
-          <div class="d-flex flex-column">
+      <div class="row">
+        <div
+          class="col-12 teamNameLogo d-flex align-items-center justify-content-center flex-column"
+        >
+          <div class="teamName col-6">
             <div>
               <h3 class="p-2" style="background-color: white">Team</h3>
             </div>
@@ -19,13 +21,13 @@
               <p>{{ teamInfo.name }}</p>
             </div>
           </div>
-        </div>
-        <div>
-          <div class="teamLogo col-6" v-if="teamInfo.crestUrl">
-            <img :src="teamInfo.crestUrl" alt>
-          </div>
-          <div class="teamLogo col-6" v-else>
-            <img src="../assets/logo.png" alt>
+          <div>
+            <div class="teamLogo col-6" v-if="teamInfo.crestUrl">
+              <img :src="teamInfo.crestUrl" alt>
+            </div>
+            <div class="teamLogo col-6" v-else>
+              <img src="../assets/logo.png" alt>
+            </div>
           </div>
         </div>
       </div>
@@ -110,7 +112,7 @@ export default {
           throw new Error(response.statusText);
         })
         .then(json => {
-          console.log(json);
+          // console.log(json);
           this.teamInfo = json;
           this.teamSelected = true;
         });
