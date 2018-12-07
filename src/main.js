@@ -20,13 +20,15 @@ import {
   library
 } from '@fortawesome/fontawesome-svg-core'
 import {
-  faFutbol
+  faFutbol,
+  faTable
 } from '@fortawesome/free-solid-svg-icons'
 import {
   FontAwesomeIcon
 } from '@fortawesome/vue-fontawesome'
 
 library.add(faFutbol)
+library.add(faTable)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

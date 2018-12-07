@@ -52,7 +52,7 @@
         <!-- end collapse -->
       </div>
     </div>
-    <!-- <router-view/> -->
+
     <footer>
       <p id="external">
         <a v-bind:href="'https://newsapi.org/'">Powered by NewsAPI</a>
@@ -64,7 +64,6 @@
 <script>
 export default {
   name: "home",
-  components: {},
   data() {
     return {
       articles: [],
@@ -98,7 +97,6 @@ export default {
         throw new Error(response.statusText);
       })
       .then(json => {
-        // console.log(json.articles);
         this.articles = json.articles;
       })
       .catch(error => {
@@ -107,7 +105,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 p {

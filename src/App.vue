@@ -124,20 +124,12 @@ export default {
         throw new Error(response.statusText);
       })
       .then(json => {
-        console.log("team", json);
-
-        console.log(this.returnTeamExtraInfo());
-        console.log(json.teams);
-        // let allTeams = json.teams + this.returnTeamExtraInfo();
         let allTeams = json.teams.concat(this.returnTeamExtraInfo());
-        console.log(allTeams);
         this.teams = allTeams.sort((a, b) => {
           let teamA = a.name.toLowerCase();
           let teamB = b.name.toLowerCase();
           return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
         });
-
-        // console.log(this.teams.map(o => o.name));
       })
       .catch(error => {
         console.log("Request failed: " + error.message);
@@ -153,7 +145,6 @@ body {
   opacity: 1;
 }
 </style>
-
 
 <style scoped>
 #app {

@@ -13,14 +13,7 @@
         <div
           class="col-12 teamNameLogo d-flex align-items-center justify-content-center flex-column"
         >
-          <div class="teamName col-6">
-            <div>
-              <h3 class="p-2" style="background-color: white">Team</h3>
-            </div>
-            <div>
-              <p>{{ teamInfo.name }}</p>
-            </div>
-          </div>
+          <h2 class="align-middle">{{ teamInfo.name }}</h2>
           <div>
             <div class="teamLogo col-6" v-if="teamInfo.crestUrl">
               <img :src="teamInfo.crestUrl" alt>
@@ -39,29 +32,20 @@
       >
         <h2 class="text-center p-2">Team members</h2>
       </div>
-      <div class="row members">
-        <!-- 1. Make MemberInfo component -->
-        <!-- <MemberInfo v-for="member in teamInfo.squad" memberInfo="member" /> -->
-        <div
-          class="d-flex justify-content-between col-3"
-          v-for="(member, index) in teamInfo.squad"
-          :key="index"
-        >
-          <p class="col-3">{{ member.name }}</p>
-          <p style="font-size: 8px">{{ member.id }}</p>
-          <!-- modal start -->
-          <!-- <button v-on:click="modal = !modal" class="buy btn btn-lg btn-primary">more info</button>
-          <div v-if="modal" class="modal">
-            <div class="field-inside d-flex align-items-center justify-content-center mt-5">
-              <div>
-                <div class="pl-1">{{ member.id }}</div>
-                <button v-on:click="modal =! modal" id="close" class="btn btn-lg btn-primary">Close</button>
-              </div>
+      <div class="container">
+        <div class="row members">
+          <div
+            class="d-flex justify-content-between col-3"
+            v-for="(member, index) in teamInfo.squad"
+            :key="index"
+          >
+            <div>
+              <p class="col-3">{{ member.name }}</p>
+              <!-- <Modal/> -->
             </div>
-          </div>-->
+          </div>
         </div>
       </div>
-      <!-- modal end -->
       <!-- single members end -->
       <!-- show map start -->
       <div class="row">
@@ -84,14 +68,13 @@
 <script>
 export default {
   name: "Teams",
+  components: {},
   data() {
     return {
       allTeams: this.$route.params.teams,
       teamInfo: {},
       teamSelected: false,
-      selected: null,
-      modal: false
-      // options: [{ value: null, text: "Please select a team" }]
+      selected: null
     };
   },
   methods: {
@@ -100,7 +83,6 @@ export default {
 
       let teamID = event;
       let url = `https://api.football-data.org/v2/teams/${teamID}`;
-
       let header = { "X-Auth-Token": "a43af3a65b2b477c979e6b354684816b" };
 
       fetch(url, { headers: header })
@@ -114,10 +96,10 @@ export default {
         .then(json => {
           // console.log(json);
           this.teamInfo = json;
+          console.log("this is teaminfo" + this.teamInfo);
           this.teamSelected = true;
         });
     }
-    // getTeamData: async function(teamID) {}
   }
 };
 </script>
@@ -145,29 +127,18 @@ h1 {
 
 .emptyLogo {
   width: 100px;
-  height: 100px;
+  height: auto;
   background-color: white;
 }
 
-.teamName {
+/* .teamName {
   font-size: 20px;
-}
+} */
 
 .members {
   padding: 20px;
   border: 1px solid white;
   font-size: 20px;
-}
-
-.modal {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  display: table;
 }
 
 iframe {
