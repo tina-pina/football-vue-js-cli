@@ -17,6 +17,9 @@
           {{ match.utcDate | formatDate }}
         </p>
         <p>{{ match.group }}</p>
+        <div
+          v-if="isFinished"
+        >{{ Number(match.score.fullTime.homeTeam) }} : {{ Number(match.score.fullTime.awayTeam) }}</div>
       </div>
 
       <div class="away col-4" v-if="logo[match.awayTeam.id]">
@@ -36,13 +39,13 @@ export default {
   name: "Match",
   props: {
     match: Object,
-    logo: Object
+    logo: Object,
+    isFinished: Boolean
   },
   data() {
-    return {
-      //   teamIdLogosDict: {}
-    };
+    return {};
   },
+
   filters: {
     formatDate: function(dateString) {
       let date = new Date(dateString);
@@ -51,7 +54,8 @@ export default {
       let days = date.getDate();
       return year + "-" + month + "-" + days;
     }
-  }
+  },
+  created() {}
 };
 </script>
 

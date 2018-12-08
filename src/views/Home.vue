@@ -8,7 +8,7 @@
         <div
           class="d-flex justify-content-between border-light border-bottom pt-2 pd-2 w-100"
           role="tablist"
-          v-for="(article,index) in articles"
+          v-for="(article, index) in articles"
           @click="toggleItem(index)"
           :class="{active: isActive === index}"
         >
@@ -97,7 +97,11 @@ export default {
         throw new Error(response.statusText);
       })
       .then(json => {
-        this.articles = json.articles;
+        let sortedArticles = json.articles.sort(function(a, b) {
+          return new Date(b.publishedAt) - new Date(a.publishedAt);
+        });
+
+        this.articles = sortedArticles;
       })
       .catch(error => {
         console.log("Request failed: " + error.message);

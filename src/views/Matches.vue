@@ -53,7 +53,7 @@
           v-for="(m, index) in scheduledMatches"
           :key="m.id"
         >
-          <Match v-bind:match="m" :logo="teamIdLogosDict"/>
+          <Match v-bind:match="m" :logo="teamIdLogosDict" v-bind:isFinished="false"/>
         </div>
       </div>
 
@@ -67,7 +67,7 @@
           v-for="(m, index) in finishedMatches"
           :key="m.id"
         >
-          <Match v-bind:match="m" :logo="teamIdLogosDict"/>
+          <Match v-bind:match="m" :logo="teamIdLogosDict" v-bind:isFinished="true"/>
         </div>
       </div>
     </div>
@@ -152,9 +152,12 @@ export default {
         throw new Error(response.statusText);
       })
       .then(json => {
-        console.log(json);
-        this.scheduledMatches = json.matches;
-        this.scheduledOriginalMatches = json.matches;
+        // console.log(json);
+        let sortedMatches = json.matches.sort(function(a, b) {
+          return new Date(b.utcDate) - new Date(a.utcDate);
+        });
+        this.scheduledMatches = sortedMatches;
+        this.scheduledOriginalMatches = sortedMatches;
         // Create unique home & away team array
         let homeTeamArr = [];
         let awayTeamArr = [];
@@ -168,8 +171,8 @@ export default {
             awayTeamArr.push(match.awayTeam);
           }
         }
-        console.log("home", homeTeamArr);
-        console.log("home", awayTeamArr);
+        // console.log("home", homeTeamArr);
+        // console.log("home", awayTeamArr);
         // Sort home & away team array
         this.homeTeamArr = homeTeamArr.sort((a, b) => {
           let teamA = a.name.toLowerCase();
@@ -200,9 +203,11 @@ export default {
         throw new Error(response.statusText);
       })
       .then(json => {
-        console.log("### FINISHED ###");
-        this.finishedMatches = json.matches;
-        this.finishedOriginalMatches = json.matches;
+        let sortedMatches = json.matches.sort(function(a, b) {
+          return new Date(b.utcDate) - new Date(a.utcDate);
+        });
+        this.finishedMatches = sortedMatches;
+        this.finishedOriginalMatches = sortedMatches;
       });
   }
 };
