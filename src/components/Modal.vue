@@ -5,7 +5,7 @@
     <div class="modal field-inside d-flex justify-content-between flex-column" v-if="showModal">
       <div class="modal-content">
         <div>
-          <div class="pl-1">{{ memberInfo }}</div>
+          <div class="pl-1">wow</div>
         </div>
         <button
           v-if="showModal"
@@ -21,9 +21,7 @@
 <script>
 export default {
   name: "Modal",
-  props: {
-    memberInfo: Object
-  },
+  props: {},
   data() {
     return {
       showModal: false

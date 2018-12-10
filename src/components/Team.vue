@@ -139,7 +139,6 @@ export default {
   },
   methods: {
     toggleItem(key) {
-      console.log("toggle", key);
       this.isActive = key;
     }
   },
@@ -151,6 +150,10 @@ export default {
       let days = date.getDate();
       return year + "-" + month + "-" + days;
     }
+  },
+
+  created() {
+    console.log(this.teamInfo);
   }
 };
 </script>

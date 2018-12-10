@@ -46,7 +46,8 @@ export default {
         .then(json => {
           // console.log(json);
           this.teamInfo = json;
-          console.log("TEAMINFO" + this.teamInfo);
+
+          console.log("TEAMINFO HERE" + this.teamInfo);
           this.teamSelected = true;
         });
     }

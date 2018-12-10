@@ -6,7 +6,7 @@
         <div class="mb-3 col-6">
           <!-- create dropdown from sorted teams array -->
           <b-form-select v-model="selected1">
-            <option :value="null">select a team</option>
+            <option :value="null">select a team first</option>
             <option
               v-for="(team, index) in homeTeamArr"
               :key="index"
@@ -18,7 +18,7 @@
 
         <div class="mb-3 col-6">
           <b-form-select v-model="selected2">
-            <option :value="null">select a team</option>
+            <option :value="null">select a team first</option>
             <option
               v-for="(team, index) in awayTeamArr"
               :key="index"
@@ -30,21 +30,33 @@
         </div>
       </div>
 
-      <div class="d-flex flex-row justify-content-between">
-        <button
-          type="button"
-          class="btn btn-success m-2 col-4"
-          @click="teamUpdate($event)"
-        >Find matches</button>
-        <button
-          type="button"
-          class="btn btn-success m-2 col-4"
-          @click="teamUpdateAll($event)"
-        >Show all matches</button>
+      <div class="d-flex flex-row justify-content-center">
+        <div>
+          <button
+            type="button1"
+            class="btn btn-success m-2"
+            @click="teamUpdateScheduled($event)"
+          >upcoming</button>
+        </div>
+
+        <div>
+          <button
+            type="button2"
+            class="btn btn-success m-2"
+            @click="teamUpdateFinished($event)"
+          >finished</button>
+        </div>
+        <div>
+          <button
+            type="button3"
+            class="btn btn-success m-2"
+            @click="teamUpdateAll($event)"
+          >all matches</button>
+        </div>
       </div>
 
       <!-- scheduled matches -->
-      <div class="row">
+      <div class="row" v-if="scheduled && !finished && !all">
         <div class="d-flex justify-content-center col-12">
           <h4 class="p-4">Upcoming matches</h4>
         </div>
@@ -58,7 +70,7 @@
       </div>
 
       <!-- finished -->
-      <div class="row">
+      <div class="row" v-if="finished && !scheduled && !all">
         <div class="d-flex justify-content-center col-12">
           <h4 class="p-4">Finished matches</h4>
         </div>
@@ -68,6 +80,33 @@
           :key="m.id"
         >
           <Match v-bind:match="m" :logo="teamIdLogosDict" v-bind:isFinished="true"/>
+        </div>
+      </div>
+      <!-- all -->
+      <div class="all" v-if="all && !scheduled && !finished">
+        <div class="row">
+          <div class="d-flex justify-content-center col-12">
+            <h4 class="p-4">Upcoming matches</h4>
+          </div>
+          <div
+            class="d-flex col-12 justify-content-around"
+            v-for="(m, index) in scheduledMatches"
+            :key="m.id"
+          >
+            <Match v-bind:match="m" :logo="teamIdLogosDict" v-bind:isFinished="false"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-flex justify-content-center col-12">
+            <h4 class="p-4">Finished matches</h4>
+          </div>
+          <div
+            class="d-flex col-12 justify-content-around"
+            v-for="(m, index) in finishedMatches"
+            :key="m.id"
+          >
+            <Match v-bind:match="m" :logo="teamIdLogosDict" v-bind:isFinished="true"/>
+          </div>
         </div>
       </div>
     </div>
@@ -97,7 +136,11 @@ export default {
       awayTeamArr: [],
       teamIdLogosDict: {},
       showMatch: true,
-      showSelected: false
+      showSelected: false,
+      finished: Boolean,
+      scheduled: Boolean,
+      all: Boolean,
+      notFinished: Boolean
     };
   },
   methods: {
@@ -105,8 +148,11 @@ export default {
     //   let objKey = key;
     //   return this.teamNameLogoDict[objKey];
     // },
-    teamUpdate: function(event) {
+    teamUpdateScheduled: function(event) {
       //is only giving us one team
+      this.finished = false;
+      this.all = false;
+      this.scheduled = true;
       if (!this.selected1 || !this.selected2) return;
       //filter for scheduled matches
       let filteredMembersIdScheduled = this.scheduledOriginalMatches.filter(
@@ -118,8 +164,16 @@ export default {
         }
       );
       this.scheduledMatches = filteredMembersIdScheduled;
-      console.log(this.scheduledMatches);
+      // console.log(this.scheduledMatches);
       //filter for finished matches
+    },
+    teamUpdateFinished: function(event) {
+      this.finished = true;
+      this.all = false;
+      this.scheduled = false;
+
+      if (!this.selected1 || !this.selected2) return;
+
       let filteredMembersIdFinished = this.finishedOriginalMatches.filter(
         match => {
           return (
@@ -129,11 +183,14 @@ export default {
         }
       );
       this.finishedMatches = filteredMembersIdFinished;
-      console.log(this.finishedMatches);
     },
     teamUpdateAll: function(event) {
+      this.all = true;
+      this.scheduled = false;
+      this.finished = false;
       this.scheduledMatches = this.scheduledOriginalMatches;
       this.finishedMatches = this.finishedOriginalMatches;
+      // console.log(this.finishedMatches);
     }
   },
 
@@ -158,6 +215,7 @@ export default {
         });
         this.scheduledMatches = sortedMatches;
         this.scheduledOriginalMatches = sortedMatches;
+        // console.log(this.scheduledOriginalMatches);
         // Create unique home & away team array
         let homeTeamArr = [];
         let awayTeamArr = [];
@@ -171,9 +229,7 @@ export default {
             awayTeamArr.push(match.awayTeam);
           }
         }
-        // console.log("home", homeTeamArr);
-        // console.log("home", awayTeamArr);
-        // Sort home & away team array
+
         this.homeTeamArr = homeTeamArr.sort((a, b) => {
           let teamA = a.name.toLowerCase();
           let teamB = b.name.toLowerCase();
@@ -207,6 +263,7 @@ export default {
           return new Date(b.utcDate) - new Date(a.utcDate);
         });
         this.finishedMatches = sortedMatches;
+
         this.finishedOriginalMatches = sortedMatches;
       });
   }

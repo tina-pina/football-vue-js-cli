@@ -16,9 +16,27 @@
             <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
               <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">Matches</router-link>
             </b-nav-item>
-            <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
-              <router-link to="/more">More</router-link>
-            </b-nav-item>
+            <div class="d-flex align-items-center">
+              <b-dropdown
+                id="ddown1"
+                text="More"
+                variant="link"
+                size="lg"
+                class="text-light bg-light m-3"
+                style="font-size: 25px"
+              >
+                <b-dropdown-item href="/more" style="font-size: 25px">
+                  <router-link :to="{ name: 'More', params: { teams: this.teams } }">Standings</router-link>
+                </b-dropdown-item>
+                <b-dropdown-item href="/more" style="font-size: 25px">
+                  <router-link :to="{ name: 'More', params: { teams: this.teams } }">Scorers</router-link>
+                </b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <!-- <b-dropdown-item href="/more" style="font-size: 25px">
+                  <router-link to="/more">Pictures</router-link>
+                </b-dropdown-item>-->
+              </b-dropdown>
+            </div>
           </b-nav>
         </div>
       </nav>
@@ -125,6 +143,7 @@ export default {
       })
       .then(json => {
         let allTeams = json.teams.concat(this.returnTeamExtraInfo());
+
         this.teams = allTeams.sort((a, b) => {
           let teamA = a.name.toLowerCase();
           let teamB = b.name.toLowerCase();
@@ -169,5 +188,17 @@ body {
 #nav a.router-link-exact-active {
   color: #42b983;
   text-decoration: none;
+}
+
+#ddown1 {
+  font-weight: bold;
+  color: #2c3e50;
+  height: 53px;
+  width: 100px;
+  padding: 0 auto;
+}
+
+#ddown1 a {
+  font-size: 25px;
 }
 </style>

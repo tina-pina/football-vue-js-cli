@@ -22,7 +22,8 @@ import {
 import {
   faFutbol,
   faTable,
-  faRunning
+  faRunning,
+  faHandPointer
 } from '@fortawesome/free-solid-svg-icons'
 import {
   FontAwesomeIcon
@@ -31,6 +32,7 @@ import {
 library.add(faFutbol)
 library.add(faTable)
 library.add(faRunning)
+library.add(faHandPointer)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
