@@ -147,9 +147,9 @@ export default {
       originalStandings: [],
       standings: [],
       scorers: [],
-      groupA: Boolean,
-      groupB: Boolean,
-      groupC: Boolean
+      groupA: null,
+      groupB: null,
+      groupC: null
     };
   },
   methods: {
@@ -273,9 +273,9 @@ export default {
       originalStandings: [],
       standings: [],
       scorers: [],
-      groupA: Boolean,
-      groupB: Boolean,
-      groupC: Boolean
+      groupA: null,
+      groupB: null,
+      groupC: null
     };
   },
   methods: {

@@ -1,23 +1,47 @@
 <template>
   <!-- this is the landing page -->
   <div class="landing">
-    <h1>GYG - GetYourGoal</h1>
-    <div class="d-flex justify-content-center">
-      <div class="w-50 p-3" style="background-color: darkgrey">
-        <p style="color: white; font-size: 20px">all infos around UEFA Champions League</p>
-        <p>
-          <font-awesome-icon style="color: white; height: 50px; width: 50px" icon="futbol"/>
-        </p>
-        <p style="color: white; font-size: 20px">newest games, matches, livechat and more...</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <div>
+            <h1>GetYourGoal - GYG</h1>
+            <router-link to="/home">
+              <p class="iconSmallSize" style="color:white; font-size: 50px">GYG
+                <font-awesome-icon style="color: white" size="sm" icon="futbol"/>
+              </p>
+            </router-link>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div>
-      <b-nav class="d-flex justify-content-center align-items-center">
-        <b-nav-item class="enter pt-3 pb-3 pl-5 pr-5">
-          <router-link to="/home">Enter</router-link>
-        </b-nav-item>
-      </b-nav>
+      <div class="row">
+        <div class="col-8 offset-md-2">
+          <div id="content" class="content" style="background-color: darkgrey">
+            <p
+              class="text"
+              style="color: white; font-size: 20px"
+            >all infos around UEFA Champions League</p>
+            <p>
+              <font-awesome-icon
+                class="footballIcon"
+                style="color: white; height: 50px; width: 50px"
+                icon="futbol"
+              />
+            </p>
+            <p
+              class="text"
+              style="color: white; font-size: 20px"
+            >newest games, matches, livechat and more...</p>
+          </div>
+        </div>
+      </div>
+      <div class="bigSize row">
+        <b-nav class="box col-12 d-flex justify-content-center align-items-center">
+          <b-nav-item class="enter pt-3 pb-3 pl-4 pr-4">
+            <router-link to="/home">Enter</router-link>
+          </b-nav-item>
+        </b-nav>
+      </div>
     </div>
   </div>
 </template>
@@ -30,13 +54,25 @@ export default {
 </script>
 
 <style scoped>
+/* font family */
+
+@import url("https://fonts.googleapis.com/css?family=Righteous");
+
 h1 {
   font-family: Righteous;
   color: white;
   font-size: 80px;
   margin: 20px;
 }
-@import url("https://fonts.googleapis.com/css?family=Righteous");
+
+p.iconSmallSize {
+  display: none;
+}
+
+nav-item.enter {
+  margin: 0 auto;
+  justify-content: center;
+}
 
 .enter {
   background-color: black;
@@ -46,5 +82,58 @@ h1 {
 .enter a {
   text-decoration: none;
   color: white;
+  margin: 0 20px;
+}
+
+.bigSize {
+  display: inline;
+}
+
+/* add media query */
+
+@media only screen and (max-width: 450px) and (min-width: 0px) {
+  .row {
+    display: flex;
+    margin-top: 200px;
+  }
+
+  h1,
+  p.text,
+  .bigSize {
+    display: none;
+  }
+
+  #content {
+    display: none;
+  }
+
+  p.iconSmallSize {
+    display: inline;
+    color: white;
+    size: 100rem;
+  }
+}
+
+@media only screen and (max-width: 768) and (min-width: 451px) {
+  .row {
+    display: flex;
+    margin-top: 200px;
+  }
+
+  p.text,
+  .content {
+    display: none;
+  }
+
+  .bigSize {
+    display: inline;
+  }
+
+  p.iconSmallSize {
+    display: none;
+  }
+  font-awesome {
+    display: none;
+  }
 }
 </style>

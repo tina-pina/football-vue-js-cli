@@ -1,5 +1,6 @@
 <template>
   <div class="teams">
+    <h1 v-if="showModal">This is the MODAL!</h1>
     <h1 class="m-5 font-weight-bold">Teams</h1>
     <!-- dropdown -->
     <b-form-select class="mb-3 w-50" @change="teamUpdate($event)" v-model="selected">
@@ -7,7 +8,7 @@
       <option v-for="(team, index) in allTeams" :key="index" :value="team.id">{{ team.name }}</option>
     </b-form-select>
 
-    <Team v-bind:teamInfo="teamInfo" v-if="teamSelected"/>
+    <Team v-on:open="openModal" v-bind:teamInfo="teamInfo" v-if="teamSelected"/>
   </div>
 </template>
 
@@ -24,10 +25,15 @@ export default {
       allTeams: this.$route.params.teams,
       teamInfo: {},
       selected: null,
-      teamSelected: false
+      teamSelected: false,
+      showModal: false
     };
   },
   methods: {
+    openModal: function() {
+      console.log("open modal");
+      this.showModal = !this.showModal;
+    },
     teamUpdate: function(event) {
       if (!event) return;
 

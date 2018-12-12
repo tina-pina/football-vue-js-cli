@@ -2,6 +2,7 @@
   <div class="team">
     <div class="container">
       <!-- team name and logo start -->
+      <button v-on:click="$emit('open')">create modal</button>
       <div class="row">
         <div
           class="col-12 teamNameLogo d-flex align-items-center justify-content-center flex-column"
@@ -25,6 +26,7 @@
       >
         <h2 class="text-center p-2">Team members</h2>
       </div>
+
       <!-- <div class="container">
         <div class="row members">
           <div
@@ -57,7 +59,12 @@
                 class="mb-1 col-6"
                 :style="{'backgroundColor': 'rgba(255,255,255,0)', 'border-style': 'none'}"
               >
-                <b-card-header header-tag="header" class="playerInfo p-1" role="tab">
+                <b-card-header
+                  header-tag="header"
+                  class="playerInfo p-1"
+                  role="tab"
+                  :style="{'backgroundColor': 'rgba(255,255,255,0)', 'border-style': 'none'}"
+                >
                   <b-btn
                     block
                     href="#"
@@ -67,8 +74,8 @@
                     :class="showCollapse ? 'collapsed' : null"
                     aria-controls="collapse4"
                     :aria-expanded="showCollapse ? 'true' : 'false'"
-                  >
-                    <font-awesome-icon icon="running"/>Player Info
+                  >Player Info
+                    <font-awesome-icon icon="running"/>
                   </b-btn>
                 </b-card-header>
                 <b-collapse
@@ -77,48 +84,46 @@
                   accordion="my-accordion"
                   role="tabpanel"
                   v-model="showCollapse"
+                  :style="{'backgroundColor': 'rgba(255,255,255,0)', 'border-style': 'none'}"
                 >
-                  <b-card-body v-if="isActive === key" class="item-active">
+                  <b-card-body
+                    v-if="isActive === key"
+                    class="item-active"
+                    :style="{'backgroundColor': 'rgba(255,255,255,0)', 'border-style': 'none'}"
+                  >
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="font-size: 20px"
-                    >Position : {{ value.position }}</span>
+                    <span class="card-text p-0">Position : {{ value.position }}</span>
                     <br>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="font-size: 20px"
-                    >Birthday : {{ value.dateOfBirth | formatDate }}</span>
+                    <span class="card-text p-0">Birthday : {{ value.dateOfBirth | formatDate }}</span>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="font-size: 20px"
-                    >Born in : {{ value.countryOfBirth }}</span>
+                    <span class="card-text p-0">Born in : {{ value.countryOfBirth }}</span>
                     <br>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="font-size: 20px"
-                    >Nationality : {{ value.nationality }}</span>
-
-                    <!-- <p class="card-text">
-                  <a target="_blank" v-bind:href="article.url">More Info</a>
-                    </p>-->
+                    <span class="card-text p-0">Nationality : {{ value.nationality }}</span>
                   </b-card-body>
                 </b-collapse>
               </b-card>
             </div>
           </div>
           <!-- end collapse -->
+          <!-- <iframe
+            width="100%"
+            height="600"
+            src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Tokyo&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed",
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+          ></iframe>-->
         </div>
       </div>
     </div>
@@ -134,12 +139,16 @@ export default {
   data() {
     return {
       showCollapse: true,
-      isActive: null
+      isActive: null,
+      googleURL: null
     };
   },
   methods: {
     toggleItem(key) {
       this.isActive = key;
+    },
+    createModalTest() {
+      console.log("clicked");
     }
   },
   filters: {
@@ -160,7 +169,7 @@ export default {
 
 <style scoped>
 .container {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
   color: darkblue;
 }
 
@@ -173,12 +182,6 @@ export default {
   height: 100px;
 }
 
-.emptyLogo {
-  width: 100px;
-  height: auto;
-  background-color: white;
-}
-
 .members {
   padding: 20px;
   border: 1px solid white;
@@ -187,6 +190,11 @@ export default {
 
 iframe {
   padding: 20px;
+}
+
+.card-text {
+  font-size: 21px;
+  color: white;
 }
 
 .playerInfo a {

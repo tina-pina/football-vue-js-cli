@@ -7,7 +7,7 @@
       <nav id="navLanding" class="navbar navbar-expand-lg d-flex justify-content-center">
         <div v-if="!checkLanding">
           <b-nav>
-            <b-nav-item class="ext-light bg-light m-3" style="font-size: 25px">
+            <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
               <router-link to="/home">Home</router-link>
             </b-nav-item>
             <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
@@ -23,14 +23,14 @@
                 variant="link"
                 size="lg"
                 class="text-light bg-light m-3"
-                style="font-size: 25px"
+                style="font-size: 25px; width: 120px; height:53px"
               >
-                <b-dropdown-item href="/more" style="font-size: 25px">
+                <b-nav-item class="text-light bg-light m-3" href="/more" style="font-size: 25px">
                   <router-link :to="{ name: 'More', params: { teams: this.teams } }">Standings</router-link>
-                </b-dropdown-item>
-                <b-dropdown-item href="/more" style="font-size: 25px">
+                </b-nav-item>
+                <b-nav-item class="text-light bg-light m-3" href="/more" style="font-size: 25px">
                   <router-link :to="{ name: 'More', params: { teams: this.teams } }">Scorers</router-link>
-                </b-dropdown-item>
+                </b-nav-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <!-- <b-dropdown-item href="/more" style="font-size: 25px">
                   <router-link to="/more">Pictures</router-link>
@@ -61,14 +61,27 @@ export default {
     checkLanding: function() {
       return this.$route.name === "Landing";
     },
+
     bgImage: function() {
-      if (this.$route.name == "Landing") {
-        return require("./assets/football-1406106_1922.png");
+      let viewportWidth =
+        window.innerWidth || document.documentElement.clientWidth;
+      // console.log(viewportWidth);
+      if (viewportWidth < 450) {
+        if (this.$route.name == "Landing") {
+          return require("./assets/football-1406106_1922_cropped.png");
+        } else {
+          return require("./assets/dan-gold-407757-unsplash.png");
+        }
       } else {
-        return require("./assets/dan-gold-407757-unsplash.png");
+        if (this.$route.name == "Landing") {
+          return require("./assets/football-1406106_1922.png");
+        } else {
+          return require("./assets/dan-gold-407757-unsplash.png");
+        }
       }
     }
   },
+
   methods: {
     returnTeamExtraInfo: function() {
       return [
@@ -190,15 +203,16 @@ body {
   text-decoration: none;
 }
 
-#ddown1 {
-  font-weight: bold;
-  color: #2c3e50;
+a.nav-link {
+  width: 120px;
   height: 53px;
-  width: 100px;
-  padding: 0 auto;
 }
 
-#ddown1 a {
-  font-size: 25px;
+button#ddown1 {
+  font-weight: bold;
+  color: #2c3e50;
+  width: 120px;
+  height: 53px;
+  padding: 0 auto;
 }
 </style>

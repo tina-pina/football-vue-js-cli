@@ -12,17 +12,20 @@
           @click="toggleItem(index)"
           :class="{active: isActive === index}"
         >
-          <div class="d-flex justify-content-between align-items-center col-8">
-            <h3 class="col-9">{{ article.title }}</h3>
-            <p class="col-3">date: {{ article.publishedAt | formatDate }}</p>
-          </div>
+          <p class="col-2 p-2">
+            <font-awesome-icon icon="table"/>
+            {{ article.publishedAt | formatDate }}
+          </p>
+          <h3 class="col-4" style="font-size: 16px; display:inline-block">{{ article.title }}</h3>
+
           <b-card
             no-body
-            class="mb-1 d-flex justify-content-center col-4"
+            class="mb-1 d-flex justify-content-center col-6"
             :style="{'backgroundColor': 'rgba(255,255,255,0)', 'border-style': 'none'}"
           >
             <b-card-header header-tag="header" class="p-1" role="tab">
               <b-btn
+                class="readMore"
                 block
                 href="#"
                 v-b-toggle.active
@@ -41,15 +44,19 @@
               v-model="showCollapse"
             >
               <b-card-body v-if="isActive === index" class="item-active">
-                <h5 class="card-text">{{ article.description }}</h5>
+                <h5 class="card-text" style="font-size: 16px">{{ article.description | filterDesc }}</h5>
                 <p class="card-text">
                   <a target="_blank" v-bind:href="article.url">More Info</a>
                 </p>
               </b-card-body>
             </b-collapse>
+            <!-- <p class="card-text-small">
+              <a target="_blank" v-bind:href="article.url">More Info</a>
+            </p>-->
           </b-card>
         </div>
         <!-- end collapse -->
+        <!-- start small size collapse -->
       </div>
     </div>
 
@@ -75,6 +82,13 @@ export default {
     toggleItem(index) {
       this.isActive = index;
     }
+
+    // filter() {
+    //   let filtered = this.articles.filter(
+    //     article => article.description.length > 10
+    //   );
+    //   return filtered.slice(0, 15);
+    // }
   },
   filters: {
     formatDate: function(dateString) {
@@ -83,6 +97,14 @@ export default {
       let month = date.getMonth();
       let days = date.getDate();
       return year + "-" + month + "-" + days;
+    },
+    filterDesc: function(desc) {
+      let endRes = desc
+        .split(" ")
+        .slice(0, 15)
+        .join(" ");
+      let newStr = endRes + "...";
+      return newStr;
     }
   },
   created() {
@@ -148,5 +170,21 @@ footer #external a {
 footer p {
   margin: 0;
   padding: 2rem;
+}
+
+/* p.card-text-small {
+  display: none;
+} */
+
+@media only screen and (max-width: 450px) and (min-width: 0px) {
+  /* a.btn.readMore,
+  h5.card-text,
+  p.card-text,
+  header.card-header {
+    display: none;
+  }
+  p.card-text-small {
+    display: inline;
+  } */
 }
 </style>

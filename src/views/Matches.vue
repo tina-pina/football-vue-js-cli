@@ -1,12 +1,13 @@
 <template>
   <div class="matches">
     <h1 class="m-5 font-weight-bold">Matches</h1>
-    <div class="container">
-      <div class="row">
+    <div class="container p-4">
+      <div class="row d-flex justify-content-between">
+        <!-- <p class="col-12" style="font-weight: bold">1</p> -->
         <div class="mb-3 col-6">
           <!-- create dropdown from sorted teams array -->
           <b-form-select v-model="selected1">
-            <option :value="null">select a team first</option>
+            <option :value="null">select home team first</option>
             <option
               v-for="(team, index) in homeTeamArr"
               :key="index"
@@ -18,7 +19,7 @@
 
         <div class="mb-3 col-6">
           <b-form-select v-model="selected2">
-            <option :value="null">select a team first</option>
+            <option :value="null">select away team first</option>
             <option
               v-for="(team, index) in awayTeamArr"
               :key="index"
@@ -29,14 +30,14 @@
           <img v-if="showSelected" :src="teamIdLogosDict[selected2]" alt>
         </div>
       </div>
-
-      <div class="d-flex flex-row justify-content-center">
+      <div class="d-flex flex-row justify-content-start">
+        <!-- <p style="font-weight: bold">2</p> -->
         <div>
           <button
             type="button1"
             class="btn btn-success m-2"
             @click="teamUpdateScheduled($event)"
-          >upcoming</button>
+          >upcoming matches</button>
         </div>
 
         <div>
@@ -44,15 +45,16 @@
             type="button2"
             class="btn btn-success m-2"
             @click="teamUpdateFinished($event)"
-          >finished</button>
+          >finished matches</button>
         </div>
-        <div>
-          <button
-            type="button3"
-            class="btn btn-success m-2"
-            @click="teamUpdateAll($event)"
-          >all matches</button>
-        </div>
+      </div>
+      <div class="d-flex justify-content-start">
+        <!-- <p style="font-weight: bold">3</p> -->
+        <button
+          type="button3"
+          class="btn btn-info m-2"
+          @click="teamUpdateAll($event)"
+        >all matches & teams</button>
       </div>
 
       <!-- scheduled matches -->
@@ -137,10 +139,10 @@ export default {
       teamIdLogosDict: {},
       showMatch: true,
       showSelected: false,
-      finished: Boolean,
-      scheduled: Boolean,
-      all: Boolean,
-      notFinished: Boolean
+      finished: null,
+      scheduled: null,
+      all: null,
+      notFinished: null
     };
   },
   methods: {
@@ -153,7 +155,7 @@ export default {
       this.finished = false;
       this.all = false;
       this.scheduled = true;
-      if (!this.selected1 || !this.selected2) return;
+
       //filter for scheduled matches
       let filteredMembersIdScheduled = this.scheduledOriginalMatches.filter(
         match => {
@@ -171,8 +173,6 @@ export default {
       this.finished = true;
       this.all = false;
       this.scheduled = false;
-
-      if (!this.selected1 || !this.selected2) return;
 
       let filteredMembersIdFinished = this.finishedOriginalMatches.filter(
         match => {
@@ -214,6 +214,7 @@ export default {
           return new Date(b.utcDate) - new Date(a.utcDate);
         });
         this.scheduledMatches = sortedMatches;
+        // console.log("scheduled match count", sortedMatches.length);
         this.scheduledOriginalMatches = sortedMatches;
         // console.log(this.scheduledOriginalMatches);
         // Create unique home & away team array
@@ -263,7 +264,7 @@ export default {
           return new Date(b.utcDate) - new Date(a.utcDate);
         });
         this.finishedMatches = sortedMatches;
-
+        // console.log("finished match count", sortedMatches.length);
         this.finishedOriginalMatches = sortedMatches;
       });
   }
