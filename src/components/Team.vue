@@ -2,7 +2,6 @@
   <div class="team">
     <div class="container">
       <!-- team name and logo start -->
-      <button v-on:click="$emit('open')">create modal</button>
       <div class="row">
         <div
           class="col-12 teamNameLogo d-flex align-items-center justify-content-center flex-column"
@@ -18,6 +17,19 @@
           </div>
         </div>
       </div>
+
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="modal-button col-12 d-flex justify-content-center align-items-center">
+          <button
+            class="btn btn-success"
+            style="font-weight: bold; font-size: 17px; color:white"
+            v-on:click="openModal"
+          >show map</button>
+        </div>
+        <div v-if="showModal" class="col-12 w-100 mb-4">
+          <google-map :lat="location.lat" :lng="location.lng"/>
+        </div>
+      </div>
       <!-- team name and logo end -->
       <!-- single members start -->
       <div
@@ -27,19 +39,6 @@
         <h2 class="text-center p-2">Team members</h2>
       </div>
 
-      <!-- <div class="container">
-        <div class="row members">
-          <div
-            class="d-flex justify-content-between col-3"
-            v-for="(member, index) in teamInfo.squad"
-            :key="index"
-          >
-            <div>
-              <p class="col-1">{{ member.name }}</p>
-            </div>
-          </div>
-        </div>
-      </div>-->
       <!-- single members end -->
       <!-- start collapse -->
       <div class="container">
@@ -94,21 +93,33 @@
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span class="card-text p-0">Position : {{ value.position }}</span>
+                    <span
+                      class="card-text p-0"
+                      style="color: darkblue"
+                    >Position : {{ value.position }}</span>
                     <br>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span class="card-text p-0">Birthday : {{ value.dateOfBirth | formatDate }}</span>
+                    <span
+                      class="card-text p-0"
+                      style="color: darkblue"
+                    >Birthday : {{ value.dateOfBirth | formatDate }}</span>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span class="card-text p-0">Born in : {{ value.countryOfBirth }}</span>
+                    <span
+                      class="card-text p-0"
+                      style="color: darkblue"
+                    >Born in : {{ value.countryOfBirth }}</span>
                     <br>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span class="card-text p-0">Nationality : {{ value.nationality }}</span>
+                    <span
+                      class="card-text p-0"
+                      style="color: darkblue"
+                    >Nationality : {{ value.nationality }}</span>
                   </b-card-body>
                 </b-collapse>
               </b-card>
@@ -131,25 +142,55 @@
 </template>
 
 <script>
+import GoogleMap from "./GoogleMap.vue";
+import { loaded } from "vue2-google-maps";
+import Vue from "vue";
+
 export default {
   name: "Team",
   props: {
-    teamInfo: Object
+    teamInfo: Object,
+    location: Object // {lat:..., lng:...}
+  },
+  components: {
+    GoogleMap
   },
   data() {
     return {
       showCollapse: true,
       isActive: null,
-      googleURL: null
+      googleURL: null,
+      showModal: false,
+      googleMapsInitialized: null
     };
   },
   methods: {
+    openModal: function() {
+      this.showModal = !this.showModal;
+    },
     toggleItem(key) {
       this.isActive = key;
     },
     createModalTest() {
       console.log("clicked");
     }
+  },
+  computed: {
+    icon() {
+      let baseIcon = {
+        path: "..assets/logo.png"
+      };
+      if (this.googleMapsInitialized) {
+        // we have google maps in the window
+        baseIcon.scaledSize = new window.google.maps.Size(30, 30);
+      }
+      return baseIcon;
+    }
+  },
+  async mounted() {
+    loaded.then(() => {
+      this.googleMapsInitialized = true; // define this property in data
+    });
   },
   filters: {
     formatDate: function(dateString) {
@@ -162,10 +203,11 @@ export default {
   },
 
   created() {
-    console.log(this.teamInfo);
+    console.log("TEAM" + this.teamInfo);
   }
 };
 </script>
+
 
 <style scoped>
 .container {
@@ -180,6 +222,17 @@ export default {
 .teamLogo img {
   width: 100px;
   height: 100px;
+}
+
+.modal-button {
+  padding: 10px;
+  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.modal-button button {
+  color: black;
+  font-weight: black;
 }
 
 .members {

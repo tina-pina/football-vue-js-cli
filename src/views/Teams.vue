@@ -1,19 +1,22 @@
 <template>
   <div class="teams">
-    <h1 v-if="showModal">This is the MODAL!</h1>
     <h1 class="m-5 font-weight-bold">Teams</h1>
     <!-- dropdown -->
     <b-form-select class="mb-3 w-50" @change="teamUpdate($event)" v-model="selected">
       <option :value="null">select a team</option>
       <option v-for="(team, index) in allTeams" :key="index" :value="team.id">{{ team.name }}</option>
     </b-form-select>
-
-    <Team v-on:open="openModal" v-bind:teamInfo="teamInfo" v-if="teamSelected"/>
+    <!-- <div class="d-flex justify-content-center align-items-center" v-if="showModal">
+      <div class="modalBox"></div>
+    </div>-->
+    <!-- <Team v-on:open="openModal" v-bind:teamInfo="teamInfo" v-if="teamSelected"/> -->
+    <Team v-bind:teamInfo="teamInfo" v-bind:location="location" v-if="teamSelected"/>
   </div>
 </template>
 
 <script>
 import Team from "@/components/Team.vue";
+import Vue from "vue";
 
 export default {
   name: "Teams",
@@ -26,14 +29,14 @@ export default {
       teamInfo: {},
       selected: null,
       teamSelected: false,
-      showModal: false
+      location: {}
+      // showModal: false
     };
   },
   methods: {
-    openModal: function() {
-      console.log("open modal");
-      this.showModal = !this.showModal;
-    },
+    // openModal: function() {
+    //   this.showModal = !this.showModal;
+    // },
     teamUpdate: function(event) {
       if (!event) return;
 
@@ -53,6 +56,15 @@ export default {
           // console.log(json);
           this.teamInfo = json;
 
+          var addressObj = {
+            address_line_1: this.teamInfo.venue
+          };
+
+          Vue.$geocoder.send(addressObj, response => {
+            console.log(response);
+            this.location = response.results[0].geometry.location; // {lat: ..., lng: ...}
+          });
+
           console.log("TEAMINFO HERE" + this.teamInfo);
           this.teamSelected = true;
         });
@@ -67,4 +79,10 @@ h1 {
   color: firebrick;
   font-size: 60px;
 }
+
+/* .modalBox {
+  height: 200px;
+  width: 300px;
+  background-color: black;
+} */
 </style>

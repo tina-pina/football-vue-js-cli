@@ -3,43 +3,45 @@
 
 <template>
   <div id="app" :style="{ background: 'url(' + bgImage + ')' }">
-    <div class="container">
-      <nav id="navLanding" class="navbar navbar-expand-lg d-flex justify-content-center">
-        <div v-if="!checkLanding">
-          <b-nav>
-            <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
-              <router-link to="/home">Home</router-link>
-            </b-nav-item>
-            <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
-              <router-link :to="{ name: 'Teams', params: { teams: this.teams } }">Teams</router-link>
-            </b-nav-item>
-            <b-nav-item class="text-light bg-light m-3" style="font-size: 25px">
-              <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">Matches</router-link>
-            </b-nav-item>
-            <div class="d-flex align-items-center">
-              <b-dropdown
-                id="ddown1"
-                text="More"
-                variant="link"
-                size="lg"
-                class="text-light bg-light m-3"
-                style="font-size: 25px; width: 120px; height:53px"
-              >
-                <b-nav-item class="text-light bg-light m-3" href="/more" style="font-size: 25px">
-                  <router-link :to="{ name: 'More', params: { teams: this.teams } }">Standings</router-link>
-                </b-nav-item>
-                <b-nav-item class="text-light bg-light m-3" href="/more" style="font-size: 25px">
-                  <router-link :to="{ name: 'More', params: { teams: this.teams } }">Scorers</router-link>
-                </b-nav-item>
-                <b-dropdown-divider></b-dropdown-divider>
-                <!-- <b-dropdown-item href="/more" style="font-size: 25px">
+    <div class="container-fluid w-100">
+      <div class="d-flex justify-content-center">
+        <nav id="navLanding" class="navbar navbar-expand-lg">
+          <div v-if="!checkLanding">
+            <b-nav class="d-flex align-items-center justify-content-center">
+              <b-nav-item class="text-light bg-light m-2" style="font-size: 22px">
+                <router-link to="/home">Home</router-link>
+              </b-nav-item>
+              <b-nav-item class="text-light bg-light m-2" style="font-size: 22px">
+                <router-link :to="{ name: 'Teams', params: { teams: this.teams } }">Teams</router-link>
+              </b-nav-item>
+              <b-nav-item class="text-light bg-light m-2" style="font-size: 22px">
+                <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">Matches</router-link>
+              </b-nav-item>
+              <div class="d-flex align-items-center">
+                <b-dropdown
+                  id="ddown1"
+                  text="More"
+                  variant="link"
+                  size="lg"
+                  class="text-light bg-light m-2"
+                  style="font-size: 25px; width: 120px; height:53px"
+                >
+                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 22px">
+                    <router-link :to="{ name: 'More', params: { teams: this.teams } }">Standings</router-link>
+                  </b-nav-item>
+                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 22px">
+                    <router-link :to="{ name: 'More', params: { teams: this.teams } }">Scorers</router-link>
+                  </b-nav-item>
+                  <b-dropdown-divider></b-dropdown-divider>
+                  <!-- <b-dropdown-item href="/more" style="font-size: 25px">
                   <router-link to="/more">Pictures</router-link>
-                </b-dropdown-item>-->
-              </b-dropdown>
-            </div>
-          </b-nav>
-        </div>
-      </nav>
+                  </b-dropdown-item>-->
+                </b-dropdown>
+              </div>
+            </b-nav>
+          </div>
+        </nav>
+      </div>
     </div>
 
     <router-view/>

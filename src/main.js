@@ -6,13 +6,33 @@ Vue.config.productionTip = false
 
 // bootstrap
 
+// import maps
+
+import Geocoder from "@pderas/vue2-geocoder";
+
+Vue.use(Geocoder, {
+  googleMapsApiKey: "AIzaSyBKBdq1yiLk5-pQQnRn9q-VFRwkmpJ96OA"
+});
+
+import * as VueGoogleMaps from "vue2-google-maps";
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyBKBdq1yiLk5-pQQnRn9q-VFRwkmpJ96OA",
+    libraries: "places" // necessary for places input
+  }
+});
+
 import BootstrapVue from 'bootstrap-vue'
-
 Vue.use(BootstrapVue);
-
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// vue modal
+import vmodal from 'vue-js-modal'
+Vue.use(vmodal)
+
+Vue.config.productionTip = false
 
 // font awesome
 
@@ -35,8 +55,6 @@ library.add(faRunning)
 library.add(faHandPointer)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.config.productionTip = false
 
 new Vue({
   router,

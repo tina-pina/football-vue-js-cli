@@ -3,7 +3,6 @@
     <h1 class="m-5 font-weight-bold">Matches</h1>
     <div class="container p-4">
       <div class="row d-flex justify-content-between">
-        <!-- <p class="col-12" style="font-weight: bold">1</p> -->
         <div class="mb-3 col-6">
           <!-- create dropdown from sorted teams array -->
           <b-form-select v-model="selected1">
@@ -31,7 +30,6 @@
         </div>
       </div>
       <div class="d-flex flex-row justify-content-start">
-        <!-- <p style="font-weight: bold">2</p> -->
         <div>
           <button
             type="button1"
@@ -166,8 +164,10 @@ export default {
         }
       );
       this.scheduledMatches = filteredMembersIdScheduled;
-      // console.log(this.scheduledMatches);
-      //filter for finished matches
+
+      if (this.scheduledMatches.length === 0) {
+        alert("there are no upcoming matches right now");
+      }
     },
     teamUpdateFinished: function(event) {
       this.finished = true;
@@ -183,6 +183,7 @@ export default {
         }
       );
       this.finishedMatches = filteredMembersIdFinished;
+      console.log(this.finishedMatches);
     },
     teamUpdateAll: function(event) {
       this.all = true;
@@ -209,38 +210,13 @@ export default {
         throw new Error(response.statusText);
       })
       .then(json => {
-        // console.log(json);
+        console.log("original data", json);
         let sortedMatches = json.matches.sort(function(a, b) {
           return new Date(b.utcDate) - new Date(a.utcDate);
         });
         this.scheduledMatches = sortedMatches;
-        // console.log("scheduled match count", sortedMatches.length);
         this.scheduledOriginalMatches = sortedMatches;
-        // console.log(this.scheduledOriginalMatches);
-        // Create unique home & away team array
-        let homeTeamArr = [];
-        let awayTeamArr = [];
-        for (let match of this.scheduledOriginalMatches) {
-          let homeTeamName = match.homeTeam.name;
-          if (!homeTeamArr.map(o => o.name).includes(homeTeamName)) {
-            homeTeamArr.push(match.homeTeam);
-          }
-          let awayTeamName = match.awayTeam.name;
-          if (!awayTeamArr.map(o => o.name).includes(awayTeamName)) {
-            awayTeamArr.push(match.awayTeam);
-          }
-        }
 
-        this.homeTeamArr = homeTeamArr.sort((a, b) => {
-          let teamA = a.name.toLowerCase();
-          let teamB = b.name.toLowerCase();
-          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
-        });
-        this.awayTeamArr = awayTeamArr.sort((a, b) => {
-          let teamA = a.name.toLowerCase();
-          let teamB = b.name.toLowerCase();
-          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
-        });
         // Create logo array
         let teams = this.allTeams;
         for (let team of teams) {
@@ -264,8 +240,32 @@ export default {
           return new Date(b.utcDate) - new Date(a.utcDate);
         });
         this.finishedMatches = sortedMatches;
-        // console.log("finished match count", sortedMatches.length);
         this.finishedOriginalMatches = sortedMatches;
+
+        let homeTeamArr = [];
+        let awayTeamArr = [];
+        for (let match of this.finishedOriginalMatches) {
+          let homeTeamName = match.homeTeam.name;
+          if (!homeTeamArr.map(o => o.name).includes(homeTeamName)) {
+            homeTeamArr.push(match.homeTeam);
+          }
+
+          let awayTeamName = match.awayTeam.name;
+          if (!awayTeamArr.map(o => o.name).includes(awayTeamName)) {
+            awayTeamArr.push(match.awayTeam);
+          }
+        }
+
+        this.homeTeamArr = homeTeamArr.sort((a, b) => {
+          let teamA = a.name.toLowerCase();
+          let teamB = b.name.toLowerCase();
+          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
+        });
+        this.awayTeamArr = awayTeamArr.sort((a, b) => {
+          let teamA = a.name.toLowerCase();
+          let teamB = b.name.toLowerCase();
+          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
+        });
       });
   }
 };

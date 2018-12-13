@@ -12,7 +12,7 @@
           @click="toggleItem(index)"
           :class="{active: isActive === index}"
         >
-          <p class="col-2 p-2">
+          <p class="col-3 pr-2">
             <font-awesome-icon icon="table"/>
             {{ article.publishedAt | formatDate }}
           </p>
@@ -20,7 +20,7 @@
 
           <b-card
             no-body
-            class="mb-1 d-flex justify-content-center col-6"
+            class="mb-1 d-flex justify-content-center col-5"
             :style="{'backgroundColor': 'rgba(255,255,255,0)', 'border-style': 'none'}"
           >
             <b-card-header header-tag="header" class="p-1" role="tab">
@@ -93,10 +93,16 @@ export default {
   filters: {
     formatDate: function(dateString) {
       let date = new Date(dateString);
-      let year = date.getFullYear();
-      let month = date.getMonth();
-      let days = date.getDate();
-      return year + "-" + month + "-" + days;
+      let str = date
+        .toLocaleString()
+        .split(" ")
+        .slice(0, 1)
+        .join(" ");
+      let newStr = str
+        .split("")
+        .slice(0, 10)
+        .join("");
+      return newStr;
     },
     filterDesc: function(desc) {
       let endRes = desc

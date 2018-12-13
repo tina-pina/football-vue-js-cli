@@ -119,14 +119,21 @@
             >UEFA Champions League - Player Stats 2018/2019</span>
           </div>
           <div
-            class="row p-2 d-flex align-items-center border border-bottom"
+            class="row p-2 d-flex justify-content-around align-items-center border border-bottom"
             style="background-color:#e9ecef"
             v-for="(s,index) in scorers"
           >
-            <div class="col-4" style="font-weight:bold">{{s.player.name}}</div>
-            <div class="col-4">{{s.team.name}}</div>
-            <img class="logo" :src="teamIdLogosDict[s.team.id]" alt>
-            <div class="col-4" style="font-weight: bold; font-size:18px">{{s.numberOfGoals}}</div>
+            <div
+              class="col-4 d-flex justify-content-center"
+              style="font-weight:bold; font-size: 13px"
+            >{{s.player.name}}</div>
+            <div class="col-4 d-flex justify-content-center" style="font-size:11px">{{s.team.name}}</div>
+            <div class="col-2">
+              <img class="logo" :src="teamIdLogosDict[s.team.id]" alt>
+            </div>
+            <div class="col-2 d-flex justify-content-center">
+              <div style="font-weight: bold; font-size:18px">{{s.numberOfGoals}}</div>
+            </div>
           </div>
         </div>
       </div>

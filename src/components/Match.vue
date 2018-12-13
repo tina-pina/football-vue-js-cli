@@ -2,11 +2,11 @@
   <!-- this is the landing page -->
   <div class="match row w-100 border-light border-bottom pt-2 pb-4">
     <div class="col-12 d-flex justify-content-between">
-      <div class="home col-4" v-if="logo[match.homeTeam.id]">
-        <p class="m-3" style="height:88px">{{ match.homeTeam.name }}</p>
+      <div class="home col-4 p-2" v-if="logo[match.homeTeam.id]">
+        <p class="m-3" style="height:88px; font-weight: bold">{{ match.homeTeam.name }}</p>
         <img :src="logo[match.homeTeam.id]" alt>
       </div>
-      <div class="home col-4" v-else>
+      <div class="home col-4 p-2" v-else>
         <p class="m-3" style="height:88px">{{ match.homeTeam.name }}</p>
         <img src="../assets/logo.png" alt>
       </div>
@@ -16,17 +16,18 @@
           <font-awesome-icon icon="table"/>
           {{ match.utcDate | formatDate }}
         </p>
-        <p>{{ match.group }}</p>
+        <p>{{ match.utcDate | formatHours }}</p>
+        <p style="font-weight: bold">{{ match.group }}</p>
         <div
           v-if="isFinished"
         >{{ Number(match.score.fullTime.homeTeam) }} : {{ Number(match.score.fullTime.awayTeam) }}</div>
       </div>
 
-      <div class="away col-4" v-if="logo[match.awayTeam.id]">
-        <p class="m-3" style="height:88px">{{ match.awayTeam.name }}</p>
+      <div class="away col-4 p-2" v-if="logo[match.awayTeam.id]">
+        <p class="m-3" style="height:88px; font-weight: bold">{{ match.awayTeam.name }}</p>
         <img :src="logo[match.awayTeam.id]" alt>
       </div>
-      <div class="away col-4" v-else>
+      <div class="away col-4 p-2" v-else>
         <p class="m-3" style="height:88px">{{ match.awayTeam.name }}</p>
         <img src="../assets/logo.png" alt>
       </div>
@@ -49,10 +50,23 @@ export default {
   filters: {
     formatDate: function(dateString) {
       let date = new Date(dateString);
-      let year = date.getFullYear();
-      let month = date.getMonth();
-      let days = date.getDate();
-      return year + "-" + month + "-" + days;
+      let str = date.toGMTString();
+      return str
+        .split(" ")
+        .slice(0, 4)
+        .join(" ");
+    },
+    formatHours: function(dateString) {
+      let date = new Date(dateString);
+
+      let str = date.toLocaleString().split(" ");
+      let newStr = str.slice(1, 2);
+      let newest = newStr.join("").slice(0, 4);
+
+      let pm = date.toLocaleString().split(" ");
+      let pmStr = str.slice(2).join("");
+
+      return newest + " " + pmStr;
     }
   }
 };

@@ -3,7 +3,7 @@
   <div class="landing">
     <div class="container">
       <div class="row">
-        <div class="col-12 d-flex justify-content-center align-items-center">
+        <div class="col-12 d-flex justify-content-center align-items-center mt-4">
           <div>
             <h1>GetYourGoal - GYG</h1>
             <router-link to="/home">
@@ -16,7 +16,7 @@
       </div>
       <div class="row">
         <div class="col-8 offset-md-2">
-          <div id="content" class="content" style="background-color: darkgrey">
+          <div id="content" class="content mt-5 p-1" style="background-color: darkgrey">
             <p
               class="text"
               style="color: white; font-size: 20px"
@@ -36,7 +36,10 @@
         </div>
       </div>
       <div class="bigSize row">
-        <b-nav class="box col-12 d-flex justify-content-center align-items-center">
+        <b-nav
+          class="box col-12 d-flex justify-content-center align-items-start ml-5"
+          style="height: 50%"
+        >
           <b-nav-item class="enter pt-3 pb-3 pl-4 pr-4">
             <router-link to="/home">Enter</router-link>
           </b-nav-item>
