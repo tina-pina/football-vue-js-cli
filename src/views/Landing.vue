@@ -7,8 +7,8 @@
           <div>
             <h1>GetYourGoal - GYG</h1>
             <router-link to="/home">
-              <p class="iconSmallSize" style="color:white; font-size: 50px">GYG
-                <font-awesome-icon style="color: white" size="sm" icon="futbol"/>
+              <p class="iconSmallSize">GYG
+                <font-awesome-icon size="sm" icon="futbol"/>
               </p>
             </router-link>
           </div>
@@ -22,11 +22,7 @@
               style="color: white; font-size: 20px"
             >all infos around UEFA Champions League</p>
             <p>
-              <font-awesome-icon
-                class="footballIcon"
-                style="color: white; height: 50px; width: 50px"
-                icon="futbol"
-              />
+              <font-awesome-icon class="footballIcon" style="color: white" icon="futbol"/>
             </p>
             <p
               class="text"
@@ -114,6 +110,7 @@ nav-item.enter {
     display: inline;
     color: white;
     size: 100rem;
+    font-size: 50px;
   }
 }
 
@@ -133,9 +130,6 @@ nav-item.enter {
   }
 
   p.iconSmallSize {
-    display: none;
-  }
-  font-awesome {
     display: none;
   }
 }

@@ -1,13 +1,12 @@
 <template>
-  <!-- this is the landing page -->
   <div class="match row w-100 border-light border-bottom pt-2 pb-4">
     <div class="col-12 d-flex justify-content-between">
       <div class="home col-4 p-2" v-if="logo[match.homeTeam.id]">
-        <p class="m-3" style="height:88px; font-weight: bold">{{ match.homeTeam.name }}</p>
+        <p class="m-3 homeTeam">{{ match.homeTeam.name }}</p>
         <img :src="logo[match.homeTeam.id]" alt>
       </div>
       <div class="home col-4 p-2" v-else>
-        <p class="m-3" style="height:88px">{{ match.homeTeam.name }}</p>
+        <p class="m-3 homeTeam">{{ match.homeTeam.name }}</p>
         <img src="../assets/logo.png" alt>
       </div>
 
@@ -17,18 +16,18 @@
           {{ match.utcDate | formatDate }}
         </p>
         <p>{{ match.utcDate | formatHours }}</p>
-        <p style="font-weight: bold">{{ match.group }}</p>
+        <p class="group">{{ match.group }}</p>
         <div
           v-if="isFinished"
         >{{ Number(match.score.fullTime.homeTeam) }} : {{ Number(match.score.fullTime.awayTeam) }}</div>
       </div>
 
       <div class="away col-4 p-2" v-if="logo[match.awayTeam.id]">
-        <p class="m-3" style="height:88px; font-weight: bold">{{ match.awayTeam.name }}</p>
+        <p class="awayTeam m-3">{{ match.awayTeam.name }}</p>
         <img :src="logo[match.awayTeam.id]" alt>
       </div>
       <div class="away col-4 p-2" v-else>
-        <p class="m-3" style="height:88px">{{ match.awayTeam.name }}</p>
+        <p class="awayTeam m-3">{{ match.awayTeam.name }}</p>
         <img src="../assets/logo.png" alt>
       </div>
     </div>
@@ -76,5 +75,19 @@ export default {
 img {
   height: 100px;
   width: 100px;
+}
+
+p.homeTeam {
+  height: 88px;
+  font-weight: bold;
+}
+
+p.group {
+  font-weight: bold;
+}
+
+p.awayTeam {
+  height: 88px;
+  font-weight: bold;
 }
 </style>

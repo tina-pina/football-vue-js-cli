@@ -21,8 +21,8 @@
       <div class="row d-flex justify-content-center align-items-center">
         <div class="modal-button col-12 d-flex justify-content-center align-items-center">
           <button
-            class="btn btn-success"
-            style="font-weight: bold; font-size: 17px; color:white"
+            class="map-button btn btn-success"
+            style="font-weight: bold; font-size: 17px; color: white;"
             v-on:click="openModal"
           >show map</button>
         </div>
@@ -32,10 +32,7 @@
       </div>
       <!-- team name and logo end -->
       <!-- single members start -->
-      <div
-        class="row title d-flex justify-content-center border-bottom border-danger"
-        style="background-color:white; border-width:3px !important"
-      >
+      <div class="row title d-flex justify-content-center border-bottom border-danger">
         <h2 class="text-center p-2">Team members</h2>
       </div>
 
@@ -50,8 +47,8 @@
             @click="toggleItem(key)"
             :class="{active: isActive === key}"
           >
-            <div class="row d-flex">
-              <p class="col-6" style="font-size:30px; font-weight:bold">{{ value.name }}</p>
+            <div class="memberInfo row d-flex">
+              <p class="col-6">{{ value.name }}</p>
 
               <b-card
                 no-body
@@ -93,48 +90,26 @@
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="color: darkblue"
-                    >Position : {{ value.position }}</span>
+                    <span class="card-text p-0">Position : {{ value.position }}</span>
                     <br>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="color: darkblue"
-                    >Birthday : {{ value.dateOfBirth | formatDate }}</span>
+                    <span class="card-text p-0">Birthday : {{ value.dateOfBirth | formatDate }}</span>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="color: darkblue"
-                    >Born in : {{ value.countryOfBirth }}</span>
+                    <span class="card-text p-0">Born in : {{ value.countryOfBirth }}</span>
                     <br>
                     <span class="p-2">
                       <font-awesome-icon icon="futbol"/>
                     </span>
-                    <span
-                      class="card-text p-0"
-                      style="color: darkblue"
-                    >Nationality : {{ value.nationality }}</span>
+                    <span class="card-text p-0">Nationality : {{ value.nationality }}</span>
                   </b-card-body>
                 </b-collapse>
               </b-card>
             </div>
           </div>
-          <!-- end collapse -->
-          <!-- <iframe
-            width="100%"
-            height="600"
-            src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Tokyo&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed",
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-          ></iframe>-->
         </div>
       </div>
     </div>
@@ -143,7 +118,6 @@
 
 <script>
 import GoogleMap from "./GoogleMap.vue";
-import { loaded } from "vue2-google-maps";
 import Vue from "vue";
 
 export default {
@@ -170,28 +144,9 @@ export default {
     },
     toggleItem(key) {
       this.isActive = key;
-    },
-    createModalTest() {
-      console.log("clicked");
     }
   },
-  computed: {
-    icon() {
-      let baseIcon = {
-        path: "..assets/logo.png"
-      };
-      if (this.googleMapsInitialized) {
-        // we have google maps in the window
-        baseIcon.scaledSize = new window.google.maps.Size(30, 30);
-      }
-      return baseIcon;
-    }
-  },
-  async mounted() {
-    loaded.then(() => {
-      this.googleMapsInitialized = true; // define this property in data
-    });
-  },
+
   filters: {
     formatDate: function(dateString) {
       let date = new Date(dateString);
@@ -200,10 +155,6 @@ export default {
       let days = date.getDate();
       return year + "-" + month + "-" + days;
     }
-  },
-
-  created() {
-    console.log("TEAM" + this.teamInfo);
   }
 };
 </script>
@@ -230,24 +181,19 @@ export default {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-.modal-button button {
-  color: black;
-  font-weight: black;
+.title {
+  background-color: white;
+  border-width: 3px !important;
 }
 
-.members {
-  padding: 20px;
-  border: 1px solid white;
-  font-size: 20px;
-}
-
-iframe {
-  padding: 20px;
+.memberInfo p {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .card-text {
   font-size: 21px;
-  color: white;
+  color: darkblue;
 }
 
 .playerInfo a {

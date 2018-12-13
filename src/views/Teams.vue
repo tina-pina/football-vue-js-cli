@@ -6,10 +6,6 @@
       <option :value="null">select a team</option>
       <option v-for="(team, index) in allTeams" :key="index" :value="team.id">{{ team.name }}</option>
     </b-form-select>
-    <!-- <div class="d-flex justify-content-center align-items-center" v-if="showModal">
-      <div class="modalBox"></div>
-    </div>-->
-    <!-- <Team v-on:open="openModal" v-bind:teamInfo="teamInfo" v-if="teamSelected"/> -->
     <Team v-bind:teamInfo="teamInfo" v-bind:location="location" v-if="teamSelected"/>
   </div>
 </template>
@@ -30,13 +26,9 @@ export default {
       selected: null,
       teamSelected: false,
       location: {}
-      // showModal: false
     };
   },
   methods: {
-    // openModal: function() {
-    //   this.showModal = !this.showModal;
-    // },
     teamUpdate: function(event) {
       if (!event) return;
 
@@ -53,7 +45,6 @@ export default {
           throw new Error(response.statusText);
         })
         .then(json => {
-          // console.log(json);
           this.teamInfo = json;
 
           var addressObj = {
@@ -64,8 +55,6 @@ export default {
             console.log(response);
             this.location = response.results[0].geometry.location; // {lat: ..., lng: ...}
           });
-
-          console.log("TEAMINFO HERE" + this.teamInfo);
           this.teamSelected = true;
         });
     }
@@ -73,16 +62,9 @@ export default {
 };
 </script>
 
-  
 <style scoped>
 h1 {
   color: firebrick;
   font-size: 60px;
 }
-
-/* .modalBox {
-  height: 200px;
-  width: 300px;
-  background-color: black;
-} */
 </style>

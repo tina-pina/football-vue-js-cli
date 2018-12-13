@@ -1,6 +1,4 @@
 
-/*make navigation inside app -> it will be another component with all the links to the other pages like matches*/
-
 <template>
   <div id="app" :style="{ background: 'url(' + bgImage + ')' }">
     <div class="container-fluid w-100">
@@ -32,10 +30,6 @@
                   <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 22px">
                     <router-link :to="{ name: 'More', params: { teams: this.teams } }">Scorers</router-link>
                   </b-nav-item>
-                  <b-dropdown-divider></b-dropdown-divider>
-                  <!-- <b-dropdown-item href="/more" style="font-size: 25px">
-                  <router-link to="/more">Pictures</router-link>
-                  </b-dropdown-item>-->
                 </b-dropdown>
               </div>
             </b-nav>
@@ -67,15 +61,14 @@ export default {
     bgImage: function() {
       let viewportWidth =
         window.innerWidth || document.documentElement.clientWidth;
-      // console.log(viewportWidth);
       if (viewportWidth < 450) {
-        if (this.$route.name == "Landing") {
+        if (this.$route.name === "Landing") {
           return require("./assets/football-1406106_1922_cropped.png");
         } else {
           return require("./assets/dan-gold-407757-unsplash.png");
         }
       } else {
-        if (this.$route.name == "Landing") {
+        if (this.$route.name === "Landing") {
           return require("./assets/football-1406106_1922.png");
         } else {
           return require("./assets/dan-gold-407757-unsplash.png");

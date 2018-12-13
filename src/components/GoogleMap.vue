@@ -1,7 +1,7 @@
 <template>
   <div>
     <label>
-      <button @click="addMarker">Add</button>
+      <!-- <button @click="addMarker">Add</button> -->
     </label>
     <gmap-map :center="{ lat: lat, lng: lng }" :zoom="18" style="width:100%;  height: 400px;">
       <gmap-marker

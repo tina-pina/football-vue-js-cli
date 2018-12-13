@@ -4,8 +4,6 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-// bootstrap
-
 // import maps
 
 import Geocoder from "@pderas/vue2-geocoder";
@@ -21,6 +19,8 @@ Vue.use(VueGoogleMaps, {
     libraries: "places" // necessary for places input
   }
 });
+
+//bootstrap
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);

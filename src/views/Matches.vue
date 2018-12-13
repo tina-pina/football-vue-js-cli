@@ -47,7 +47,6 @@
         </div>
       </div>
       <div class="d-flex justify-content-start">
-        <!-- <p style="font-weight: bold">3</p> -->
         <button
           type="button3"
           class="btn btn-info m-2"
@@ -149,7 +148,7 @@ export default {
     //   return this.teamNameLogoDict[objKey];
     // },
     teamUpdateScheduled: function(event) {
-      //is only giving us one team
+      //get one team
       this.finished = false;
       this.all = false;
       this.scheduled = true;
@@ -191,7 +190,6 @@ export default {
       this.finished = false;
       this.scheduledMatches = this.scheduledOriginalMatches;
       this.finishedMatches = this.finishedOriginalMatches;
-      // console.log(this.finishedMatches);
     }
   },
 

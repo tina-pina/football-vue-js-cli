@@ -6,17 +6,17 @@
       <div class="row">
         <!-- start collapse -->
         <div
-          class="d-flex justify-content-between border-light border-bottom pt-2 pd-2 w-100"
+          class="d-flex justify-content-between border-light border-bottom pt-3 pd-2 w-100"
           role="tablist"
           v-for="(article, index) in articles"
           @click="toggleItem(index)"
           :class="{active: isActive === index}"
         >
-          <p class="col-3 pr-2">
+          <p class="col-3 p-1">
             <font-awesome-icon icon="table"/>
             {{ article.publishedAt | formatDate }}
           </p>
-          <h3 class="col-4" style="font-size: 16px; display:inline-block">{{ article.title }}</h3>
+          <h3 class="col-4">{{ article.title }}</h3>
 
           <b-card
             no-body
@@ -44,19 +44,15 @@
               v-model="showCollapse"
             >
               <b-card-body v-if="isActive === index" class="item-active">
-                <h5 class="card-text" style="font-size: 16px">{{ article.description | filterDesc }}</h5>
+                <h5 class="card-text">{{ article.description | filterDesc }}</h5>
                 <p class="card-text">
                   <a target="_blank" v-bind:href="article.url">More Info</a>
                 </p>
               </b-card-body>
             </b-collapse>
-            <!-- <p class="card-text-small">
-              <a target="_blank" v-bind:href="article.url">More Info</a>
-            </p>-->
           </b-card>
         </div>
         <!-- end collapse -->
-        <!-- start small size collapse -->
       </div>
     </div>
 
@@ -82,13 +78,6 @@ export default {
     toggleItem(index) {
       this.isActive = index;
     }
-
-    // filter() {
-    //   let filtered = this.articles.filter(
-    //     article => article.description.length > 10
-    //   );
-    //   return filtered.slice(0, 15);
-    // }
   },
   filters: {
     formatDate: function(dateString) {
@@ -149,6 +138,15 @@ h1 {
   font-size: 60px;
 }
 
+h3 {
+  font-size: 16px;
+  display: inline-block;
+}
+
+h5.card-text {
+  font-size: 16px;
+}
+
 .container {
   background-color: rgba(255, 255, 255, 0.7);
   color: darkblue;
@@ -156,11 +154,6 @@ h1 {
 
 .card {
   background-color: rgba(255, 255, 255, 0.7);
-}
-
-h2 {
-  color: black;
-  font-weight: bold;
 }
 
 .container p {
@@ -176,21 +169,5 @@ footer #external a {
 footer p {
   margin: 0;
   padding: 2rem;
-}
-
-/* p.card-text-small {
-  display: none;
-} */
-
-@media only screen and (max-width: 450px) and (min-width: 0px) {
-  /* a.btn.readMore,
-  h5.card-text,
-  p.card-text,
-  header.card-header {
-    display: none;
-  }
-  p.card-text-small {
-    display: inline;
-  } */
 }
 </style>
