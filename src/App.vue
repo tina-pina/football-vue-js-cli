@@ -63,7 +63,7 @@ export default {
         window.innerWidth || document.documentElement.clientWidth;
       if (viewportWidth < 450) {
         if (this.$route.name === "Landing") {
-          return require("./assets/football-1406106_1922_cropped.png");
+          return require("./assets/football-1406106_1922.png");
         } else {
           return require("./assets/dan-gold-407757-unsplash.png");
         }
@@ -170,6 +170,9 @@ body {
   width: 100%;
   height: 100%;
   opacity: 1;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 </style>
 
@@ -178,8 +181,13 @@ body {
   width: 100%;
   min-height: 100vh;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
+  background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   text-align: center;
   color: #2c3e50;
 }

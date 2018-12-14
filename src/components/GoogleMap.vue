@@ -1,15 +1,7 @@
 <template>
   <div>
-    <label>
-      <!-- <button @click="addMarker">Add</button> -->
-    </label>
-    <gmap-map :center="{ lat: lat, lng: lng }" :zoom="18" style="width:100%;  height: 400px;">
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="center=m.position"
-      ></gmap-marker>
+    <gmap-map :center="{ lat: lat, lng: lng }" :zoom="15" style="width:100%;  height: 400px;">
+      <gmap-marker :position="{ lat: lat, lng: lng }"></gmap-marker>
     </gmap-map>
   </div>
 </template>
@@ -17,43 +9,16 @@
 <script>
 export default {
   name: "GoogleMap",
-  props: ["lat", "lng"],
+  props: {
+    lat: Number,
+    lng: Number
+  },
   data() {
     return {
-      //   default coordinates
-      center: { lat: 45.508, lng: -73.587 },
       markers: [],
       places: [],
       currentPlace: null
     };
-  },
-
-  mounted() {
-    this.geolocate();
-  },
-
-  methods: {
-    // receives a place object via the autocomplete component
-    addMarker() {
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
-        };
-        this.markers.push({ position: marker });
-        this.places.push(this.currentPlace);
-        this.center = marker;
-        this.currentPlace = null;
-      }
-    },
-    geolocate: function() {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-      });
-    }
   }
 };
 </script>

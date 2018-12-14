@@ -135,7 +135,6 @@ export default {
       isActive: null,
       googleURL: null,
       showModal: false,
-      googleMapsInitialized: null
     };
   },
   methods: {

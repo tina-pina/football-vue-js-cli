@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row d-flex justify-content-center">
         <div class="col-8 offset-md-2">
           <div id="content" class="content mt-5 p-1" style="background-color: darkgrey">
             <p
@@ -33,7 +33,7 @@
       </div>
       <div class="bigSize row">
         <b-nav
-          class="box col-12 d-flex justify-content-center align-items-start ml-5"
+          class="box col-12 d-flex justify-content-center align-items-start"
           style="height: 50%"
         >
           <b-nav-item class="enter pt-3 pb-3 pl-4 pr-4">

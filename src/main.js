@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import firebase from "firebase/app";
 
 Vue.config.productionTip = false
 
@@ -55,6 +56,17 @@ library.add(faRunning)
 library.add(faHandPointer)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyD8vHD10Ltb9qcoiC667y-kcRyLPIWcyJE",
+  authDomain: "football-vue.firebaseapp.com",
+  databaseURL: "https://football-vue.firebaseio.com",
+  projectId: "football-vue",
+  storageBucket: "football-vue.appspot.com",
+  messagingSenderId: "760203642493"
+};
+firebase.initializeApp(config);
 
 new Vue({
   router,
