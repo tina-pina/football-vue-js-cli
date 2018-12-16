@@ -3,8 +3,11 @@
   <div id="app" :style="{ background: 'url(' + bgImage + ')' }">
     <div class="container-fluid w-100">
       <div class="d-flex justify-content-center">
-        <nav id="navLanding" class="navbar navbar-expand-lg">
+        <nav id="navLanding" class="navbar navbar-expand-lg m-4">
           <div v-if="!checkLanding">
+            <!-- <div class="col-12 d-flex justify-content-end">
+              <Logout/>
+            </div>-->
             <b-nav class="d-flex align-items-center justify-content-center">
               <b-nav-item class="text-light bg-light m-2" style="font-size: 22px">
                 <router-link to="/home">Home</router-link>
@@ -22,13 +25,23 @@
                   variant="link"
                   size="lg"
                   class="text-light bg-light m-2"
-                  style="font-size: 25px; width: 120px; height:53px"
+                  style="font-size: 22px; width: 120px; height:53px"
                 >
-                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 22px">
-                    <router-link :to="{ name: 'More', params: { teams: this.teams } }">Standings</router-link>
+                  <b-nav-item class="text-light bg-light m-2" style="font-size: 18px">
+                    <router-link class="d-flex justify-content-center" to="/lifechat">
+                      <font-awesome-icon class="comments" icon="comments"/>
+                    </router-link>
                   </b-nav-item>
-                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 22px">
+                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 18px">
+                    <router-link
+                      :to="{ name: 'More', params: { teams: this.teams } }"
+                    >Standings / Scorers</router-link>
+                  </b-nav-item>
+                  <!-- <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 22px">
                     <router-link :to="{ name: 'More', params: { teams: this.teams } }">Scorers</router-link>
+                  </b-nav-item>-->
+                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 18px">
+                    <Logout/>
                   </b-nav-item>
                 </b-dropdown>
               </div>
@@ -44,9 +57,13 @@
 
 
 <script>
+import Logout from "./components/Logout.vue";
+
 export default {
   name: "app",
-  components: {},
+  components: {
+    Logout
+  },
   data() {
     return {
       teams: [],

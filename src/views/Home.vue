@@ -2,6 +2,7 @@
   <!-- this is the landing page -->
   <div class="home">
     <h1 class="m-5 font-weight-bold">NEWS</h1>
+
     <div class="container">
       <div class="row">
         <!-- start collapse -->
@@ -65,6 +66,10 @@
 </template>
 
 <script>
+// import Lifechat from "../views/Lifechat.vue";
+
+import firebase from "firebase/app";
+
 export default {
   name: "home",
   data() {

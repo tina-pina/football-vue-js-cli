@@ -4,14 +4,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 d-flex justify-content-center align-items-center mt-4">
-          <div>
-            <h1>GetYourGoal - GYG</h1>
-            <router-link to="/home">
-              <p class="iconSmallSize">GYG
-                <font-awesome-icon size="sm" icon="futbol"/>
-              </p>
-            </router-link>
-          </div>
+          <h1>GYG</h1>
+          <h4>GetYourGoal</h4>
         </div>
       </div>
       <div class="row d-flex justify-content-center">
@@ -37,7 +31,7 @@
           style="height: 50%"
         >
           <b-nav-item class="enter pt-3 pb-3 pl-4 pr-4">
-            <router-link to="/home">Enter</router-link>
+            <Login/>
           </b-nav-item>
         </b-nav>
       </div>
@@ -46,9 +40,13 @@
 </template>
 
 <script>
+import Login from "@/components/Login.vue";
+
 export default {
   name: "landing",
-  components: {}
+  components: {
+    Login
+  }
 };
 </script>
 
@@ -61,11 +59,6 @@ h1 {
   font-family: Righteous;
   color: white;
   font-size: 80px;
-  margin: 20px;
-}
-
-p.iconSmallSize {
-  display: none;
 }
 
 nav-item.enter {
@@ -75,7 +68,7 @@ nav-item.enter {
 
 .enter {
   background-color: black;
-  margin: 80px;
+  margin-bottom: 20px;
 }
 
 .enter a {
@@ -91,26 +84,12 @@ nav-item.enter {
 /* add media query */
 
 @media only screen and (max-width: 450px) and (min-width: 0px) {
-  .row {
-    display: flex;
-    margin-top: 200px;
-  }
-
-  h1,
-  p.text,
-  .bigSize {
+  p.text {
     display: none;
   }
 
   #content {
     display: none;
-  }
-
-  p.iconSmallSize {
-    display: inline;
-    color: white;
-    size: 100rem;
-    font-size: 50px;
   }
 }
 
@@ -127,10 +106,6 @@ nav-item.enter {
 
   .bigSize {
     display: inline;
-  }
-
-  p.iconSmallSize {
-    display: none;
   }
 }
 </style>
