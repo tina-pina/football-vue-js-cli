@@ -139,12 +139,10 @@
   </div>
 </template>
 
-
-
 <script>
 export default {
-  name: "More",
-  data() {
+  name: 'More',
+  data () {
     return {
       allTeams: this.$route.params.teams,
       teamIdLogosDict: {},
@@ -154,104 +152,103 @@ export default {
       groupA: null,
       groupB: null,
       groupC: null
-    };
+    }
   },
   methods: {
-    showGroupA: function(event) {
-      this.standings = this.originalStandings;
-      this.groupA = true;
-      this.groupB = false;
-      this.groupC = false;
+    showGroupA: function (event) {
+      this.standings = this.originalStandings
+      this.groupA = true
+      this.groupB = false
+      this.groupC = false
 
       let groupATab = this.standings // [{}, {}, {}, ...]
-        .filter(obj => obj.group === "GROUP_A" && obj.type === "TOTAL") // [{ table:[], ...}, {}, ....]
-        .map(obj => obj.table); // [[], [], [], ...]
+        .filter(obj => obj.group === 'GROUP_A' && obj.type === 'TOTAL') // [{ table:[], ...}, {}, ....]
+        .map(obj => obj.table) // [[], [], [], ...]
 
-      let table = []; // [] + [1,2,3,] => [1,2,3,...]
-      for (let arr of groupATab) table = table.concat(arr);
+      let table = [] // [] + [1,2,3,] => [1,2,3,...]
+      for (let arr of groupATab) table = table.concat(arr)
 
-      this.standings = table;
+      this.standings = table
     },
-    showGroupB: function(event) {
-      this.standings = this.originalStandings;
-      this.groupB = true;
-      this.groupA = false;
-      this.groupC = false;
+    showGroupB: function (event) {
+      this.standings = this.originalStandings
+      this.groupB = true
+      this.groupA = false
+      this.groupC = false
 
       let groupBTab = this.standings // [{}, {}, {}, ...]
-        .filter(obj => obj.group === "GROUP_B" && obj.type === "TOTAL") // [{ table:[], ...}, {}, ....]
-        .map(obj => obj.table); // [[], [], [], ...]
+        .filter(obj => obj.group === 'GROUP_B' && obj.type === 'TOTAL') // [{ table:[], ...}, {}, ....]
+        .map(obj => obj.table) // [[], [], [], ...]
 
-      let table = []; // [] + [1,2,3,] => [1,2,3,...]
-      for (let arr of groupBTab) table = table.concat(arr);
+      let table = [] // [] + [1,2,3,] => [1,2,3,...]
+      for (let arr of groupBTab) table = table.concat(arr)
 
-      this.standings = table;
+      this.standings = table
     },
-    showGroupC: function(event) {
-      this.standings = this.originalStandings;
-      this.groupC = true;
-      this.groupA = false;
-      this.groupB = false;
+    showGroupC: function (event) {
+      this.standings = this.originalStandings
+      this.groupC = true
+      this.groupA = false
+      this.groupB = false
       let groupCTab = this.standings // [{}, {}, {}, ...]
-        .filter(obj => obj.group === "GROUP_C" && obj.type === "TOTAL") // [{ table:[], ...}, {}, ....]
-        .map(obj => obj.table); // [[], [], [], ...]
+        .filter(obj => obj.group === 'GROUP_C' && obj.type === 'TOTAL') // [{ table:[], ...}, {}, ....]
+        .map(obj => obj.table) // [[], [], [], ...]
 
-      let table = []; // [] + [1,2,3,] => [1,2,3,...]
-      for (let arr of groupCTab) table = table.concat(arr);
+      let table = [] // [] + [1,2,3,] => [1,2,3,...]
+      for (let arr of groupCTab) table = table.concat(arr)
 
-      this.standings = table;
+      this.standings = table
     }
   },
 
-  created() {
-    let baseURL = "https://api.football-data.org/v2/competitions/CL/";
-    let standingsParam = "standings";
-    let scorersParam = "scorers";
+  created () {
+    let baseURL = 'https://api.football-data.org/v2/competitions/CL/'
+    let standingsParam = 'standings'
+    let scorersParam = 'scorers'
 
-    let header = { "X-Auth-Token": "a43af3a65b2b477c979e6b354684816b" };
+    let header = { 'X-Auth-Token': 'a43af3a65b2b477c979e6b354684816b' }
     fetch(baseURL + standingsParam, { headers: header })
       .then(response => {
         if (response.ok) {
-          console.log("Request succeeded: " + response.statusText);
-          return response.json();
+          console.log('Request succeeded: ' + response.statusText)
+          return response.json()
         }
-        throw new Error(response.statusText);
+        throw new Error(response.statusText)
       })
       .then(json => {
-        this.standings = json.standings;
-        this.originalStandings = json.standings;
+        this.standings = json.standings
+        this.originalStandings = json.standings
       })
       .catch(error => {
-        console.log("Request failed: " + error.message);
-      });
+        console.log('Request failed: ' + error.message)
+      })
 
     fetch(baseURL + scorersParam, { headers: header })
       .then(response => {
         if (response.ok) {
-          console.log("Request succeeded: " + response.statusText);
-          return response.json();
+          console.log('Request succeeded: ' + response.statusText)
+          return response.json()
         }
-        throw new Error(response.statusText);
+        throw new Error(response.statusText)
       })
       .then(json => {
-        console.log(json.scorers);
-        this.scorers = json.scorers;
-        let teams = this.allTeams;
+        console.log(json.scorers)
+        this.scorers = json.scorers
+        let teams = this.allTeams
         for (let team of teams) {
           if (team.crestUrl) {
-            this.teamIdLogosDict[team.id] = team.crestUrl;
+            this.teamIdLogosDict[team.id] = team.crestUrl
           } else {
-            this.teamIdLogosDict[team.id] = "";
+            this.teamIdLogosDict[team.id] = ''
           }
         }
       })
       .catch(error => {
-        console.log("Request failed: " + error.message);
-      });
+        console.log('Request failed: ' + error.message)
+      })
   }
-};
+}
 </script>
-
 
 <style scoped>
 p {

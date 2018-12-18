@@ -112,15 +112,14 @@
   </div>
 </template>
 
-
 <script>
-import Match from "@/components/Match.vue";
+import Match from '@/components/Match.vue'
 export default {
-  name: "Matches",
+  name: 'Matches',
   components: {
     Match
   },
-  data() {
+  data () {
     return {
       allTeams: this.$route.params.teams,
       selected1: null,
@@ -140,135 +139,134 @@ export default {
       scheduled: null,
       all: null,
       notFinished: null
-    };
+    }
   },
   methods: {
     // getURL: function(key) {
     //   let objKey = key;
     //   return this.teamNameLogoDict[objKey];
     // },
-    teamUpdateScheduled: function(event) {
-      //get one team
-      this.finished = false;
-      this.all = false;
-      this.scheduled = true;
+    teamUpdateScheduled: function (event) {
+      // get one team
+      this.finished = false
+      this.all = false
+      this.scheduled = true
 
-      //filter for scheduled matches
+      // filter for scheduled matches
       let filteredMembersIdScheduled = this.scheduledOriginalMatches.filter(
         match => {
           return (
             match.homeTeam.id === this.selected1 ||
             match.awayTeam.id === this.selected2
-          );
+          )
         }
-      );
-      this.scheduledMatches = filteredMembersIdScheduled;
+      )
+      this.scheduledMatches = filteredMembersIdScheduled
 
       if (this.scheduledMatches.length === 0) {
-        alert("there are no upcoming matches right now");
+        alert('there are no upcoming matches right now')
       }
     },
-    teamUpdateFinished: function(event) {
-      this.finished = true;
-      this.all = false;
-      this.scheduled = false;
+    teamUpdateFinished: function (event) {
+      this.finished = true
+      this.all = false
+      this.scheduled = false
 
       let filteredMembersIdFinished = this.finishedOriginalMatches.filter(
         match => {
           return (
             match.homeTeam.id === this.selected1 ||
             match.awayTeam.id === this.selected2
-          );
+          )
         }
-      );
-      this.finishedMatches = filteredMembersIdFinished;
-      console.log(this.finishedMatches);
+      )
+      this.finishedMatches = filteredMembersIdFinished
+      console.log(this.finishedMatches)
     },
-    teamUpdateAll: function(event) {
-      this.all = true;
-      this.scheduled = false;
-      this.finished = false;
-      this.scheduledMatches = this.scheduledOriginalMatches;
-      this.finishedMatches = this.finishedOriginalMatches;
+    teamUpdateAll: function (event) {
+      this.all = true
+      this.scheduled = false
+      this.finished = false
+      this.scheduledMatches = this.scheduledOriginalMatches
+      this.finishedMatches = this.finishedOriginalMatches
     }
   },
 
-  created() {
-    let baseURL = "https://api.football-data.org/v2/competitions/CL/matches/";
-    let scheduledParam = "?status=SCHEDULED";
-    let finishedParam = "?status=FINISHED";
-    let header = { "X-Auth-Token": "a43af3a65b2b477c979e6b354684816b" };
+  created () {
+    let baseURL = 'https://api.football-data.org/v2/competitions/CL/matches/'
+    let scheduledParam = '?status=SCHEDULED'
+    let finishedParam = '?status=FINISHED'
+    let header = { 'X-Auth-Token': 'a43af3a65b2b477c979e6b354684816b' }
 
     fetch(baseURL + scheduledParam, { headers: header })
       .then(response => {
         if (response.ok) {
-          console.log("Scheduled Request succeeded: " + response.statusText);
-          return response.json();
+          console.log('Scheduled Request succeeded: ' + response.statusText)
+          return response.json()
         }
-        throw new Error(response.statusText);
+        throw new Error(response.statusText)
       })
       .then(json => {
-        console.log("original data", json);
-        let sortedMatches = json.matches.sort(function(a, b) {
-          return new Date(b.utcDate) - new Date(a.utcDate);
-        });
-        this.scheduledMatches = sortedMatches;
-        this.scheduledOriginalMatches = sortedMatches;
+        console.log('original data', json)
+        let sortedMatches = json.matches.sort(function (a, b) {
+          return new Date(b.utcDate) - new Date(a.utcDate)
+        })
+        this.scheduledMatches = sortedMatches
+        this.scheduledOriginalMatches = sortedMatches
 
         // Create logo array
-        let teams = this.allTeams;
+        let teams = this.allTeams
         for (let team of teams) {
-          this.teamIdLogosDict[team.id] = team.crestUrl;
+          this.teamIdLogosDict[team.id] = team.crestUrl
         }
       })
       .catch(error => {
-        console.log("Request failed: " + error.message);
-      });
+        console.log('Request failed: ' + error.message)
+      })
 
     fetch(baseURL + finishedParam, { headers: header })
       .then(response => {
         if (response.ok) {
-          console.log("Finished Request succeeded: " + response.statusText);
-          return response.json();
+          console.log('Finished Request succeeded: ' + response.statusText)
+          return response.json()
         }
-        throw new Error(response.statusText);
+        throw new Error(response.statusText)
       })
       .then(json => {
-        let sortedMatches = json.matches.sort(function(a, b) {
-          return new Date(b.utcDate) - new Date(a.utcDate);
-        });
-        this.finishedMatches = sortedMatches;
-        this.finishedOriginalMatches = sortedMatches;
+        let sortedMatches = json.matches.sort(function (a, b) {
+          return new Date(b.utcDate) - new Date(a.utcDate)
+        })
+        this.finishedMatches = sortedMatches
+        this.finishedOriginalMatches = sortedMatches
 
-        let homeTeamArr = [];
-        let awayTeamArr = [];
+        let homeTeamArr = []
+        let awayTeamArr = []
         for (let match of this.finishedOriginalMatches) {
-          let homeTeamName = match.homeTeam.name;
+          let homeTeamName = match.homeTeam.name
           if (!homeTeamArr.map(o => o.name).includes(homeTeamName)) {
-            homeTeamArr.push(match.homeTeam);
+            homeTeamArr.push(match.homeTeam)
           }
 
-          let awayTeamName = match.awayTeam.name;
+          let awayTeamName = match.awayTeam.name
           if (!awayTeamArr.map(o => o.name).includes(awayTeamName)) {
-            awayTeamArr.push(match.awayTeam);
+            awayTeamArr.push(match.awayTeam)
           }
         }
 
         this.homeTeamArr = homeTeamArr.sort((a, b) => {
-          let teamA = a.name.toLowerCase();
-          let teamB = b.name.toLowerCase();
-          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
-        });
+          let teamA = a.name.toLowerCase()
+          let teamB = b.name.toLowerCase()
+          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0
+        })
         this.awayTeamArr = awayTeamArr.sort((a, b) => {
-          let teamA = a.name.toLowerCase();
-          let teamB = b.name.toLowerCase();
-          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0;
-        });
-      });
+          let teamA = a.name.toLowerCase()
+          let teamB = b.name.toLowerCase()
+          return teamA < teamB ? -1 : teamA > teamB ? 1 : 0
+        })
+      })
   }
-};
+}
 </script>
-
 
 <style scoped>
 img {
@@ -300,5 +298,3 @@ h1 {
   font-weight: bold;
 }
 </style>
-
-

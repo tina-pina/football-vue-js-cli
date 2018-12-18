@@ -8,17 +8,17 @@
 
 <script>
 export default {
-  name: "GoogleMap",
+  name: 'GoogleMap',
   props: {
     lat: Number,
     lng: Number
   },
-  data() {
+  data () {
     return {
       markers: [],
       places: [],
       currentPlace: null
-    };
+    }
   }
-};
+}
 </script>

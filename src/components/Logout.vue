@@ -1,7 +1,18 @@
 <template>
-  <div class="logout">
-    <button class="btn btn-dark" v-on:click="logout()">Logout</button>
-  </div>
+  <font-awesome-icon
+    v-on:click="logout()"
+    class="signOut mx-auto fa-w-5"
+    style="color: black"
+    icon="sign-out-alt"
+  />
+  <!-- <div class="logout">
+    <button
+      class="btn btn-light d-flex justify-content-center align-items-center"
+      v-on:click="logout()"
+    >
+      <font-awesome-icon class="signOut mx-auto fa-w-5" style="color: #007bff" icon="sign-out-alt"/>
+    </button>
+  </div>-->
 </template>
 
 <script>

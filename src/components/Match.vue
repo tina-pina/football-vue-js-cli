@@ -36,39 +36,39 @@
 
 <script>
 export default {
-  name: "Match",
+  name: 'Match',
   props: {
     match: Object,
     logo: Object,
     isFinished: Boolean
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
 
   filters: {
-    formatDate: function(dateString) {
-      let date = new Date(dateString);
-      let str = date.toGMTString();
+    formatDate: function (dateString) {
+      let date = new Date(dateString)
+      let str = date.toGMTString()
       return str
-        .split(" ")
+        .split(' ')
         .slice(0, 4)
-        .join(" ");
+        .join(' ')
     },
-    formatHours: function(dateString) {
-      let date = new Date(dateString);
+    formatHours: function (dateString) {
+      let date = new Date(dateString)
 
-      let str = date.toLocaleString().split(" ");
-      let newStr = str.slice(1, 2);
-      let newest = newStr.join("").slice(0, 4);
+      let str = date.toLocaleString().split(' ')
+      let newStr = str.slice(1, 2)
+      let newest = newStr.join('').slice(0, 4)
 
-      let pm = date.toLocaleString().split(" ");
-      let pmStr = str.slice(2).join("");
+      let pm = date.toLocaleString().split(' ')
+      let pmStr = str.slice(2).join('')
 
-      return newest + " " + pmStr;
+      return newest + ' ' + pmStr
     }
   }
-};
+}
 </script>
 
 <style scoped>

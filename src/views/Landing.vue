@@ -11,15 +11,12 @@
       <div class="row d-flex justify-content-center">
         <div class="col-8 offset-md-2">
           <div id="content" class="content mt-5 p-1" style="background-color: darkgrey">
-            <p
-              class="text"
-              style="color: white; font-size: 20px"
-            >all infos around UEFA Champions League</p>
-            <p>
+            <p class="text1" style="color: white; font-size: 20px">UEFA Champions League</p>
+            <p>Get close to the action!
               <font-awesome-icon class="footballIcon" style="color: white" icon="futbol"/>
             </p>
             <p
-              class="text"
+              class="text2"
               style="color: white; font-size: 20px"
             >newest games, matches, livechat and more...</p>
           </div>
@@ -30,9 +27,11 @@
           class="box col-12 d-flex justify-content-center align-items-start"
           style="height: 50%"
         >
-          <b-nav-item class="enter pt-3 pb-3 pl-4 pr-4">
-            <Login/>
-          </b-nav-item>
+          <!-- <b-nav-item class="enter pt-3 pb-3 pl-4 pr-4"> -->
+          <Login v-bind:btnMsg="'Login with Google'" :color="'red'"/>
+          <Login v-bind:btnMsg="'Login with Facebook'" :color="'blue'"/>
+          <Login v-bind:btnMsg="'Login with EMail'" :color="''"/>
+          <!-- </b-nav-item> -->
         </b-nav>
       </div>
     </div>
@@ -40,14 +39,14 @@
 </template>
 
 <script>
-import Login from "@/components/Login.vue";
+import Login from '@/components/Login.vue'
 
 export default {
-  name: "landing",
+  name: 'landing',
   components: {
     Login
   }
-};
+}
 </script>
 
 <style scoped>
@@ -84,11 +83,11 @@ nav-item.enter {
 /* add media query */
 
 @media only screen and (max-width: 450px) and (min-width: 0px) {
-  p.text {
-    display: none;
+  #content p.text1 {
+    display: inline;
   }
 
-  #content {
+  #content p.text2 {
     display: none;
   }
 }
@@ -99,7 +98,7 @@ nav-item.enter {
     margin-top: 200px;
   }
 
-  p.text,
+  p.text2,
   .content {
     display: none;
   }

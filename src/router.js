@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import firebase from 'firebase/app'
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
@@ -12,63 +12,65 @@ Vue.use(Router)
 
 let router = new Router({
   routes: [{
-      path: '/',
-      name: 'Landing',
-      component: Landing
+    path: '/',
+    name: 'Landing',
+    component: Landing
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    meta: {
+      requiresAuth: true
     },
-    {
-      path: '/home',
-      name: 'Home',
-      meta: {
-        requiresAuth: true
-      },
-      component: Home
+    component: Home
+  },
+  {
+    path: '/teams',
+    name: 'Teams',
+    meta: {
+      requiresAuth: true
     },
-    {
-      path: '/teams',
-      name: 'Teams',
-      meta: {
-        requiresAuth: true
-      },
-      component: Teams
+    component: Teams
+  },
+  {
+    path: '/matches',
+    name: 'Matches',
+    meta: {
+      requiresAuth: true
     },
-    {
-      path: '/matches',
-      name: 'Matches',
-      meta: {
-        requiresAuth: true
-      },
-      component: Matches
+    component: Matches
+  },
+  {
+    path: '/more',
+    name: 'More',
+    meta: {
+      requiresAuth: true
     },
-    {
-      path: '/more',
-      name: 'More',
-      meta: {
-        requiresAuth: true
-      },
-      component: More
+    component: More
+  },
+  {
+    path: '/lifechat',
+    name: 'Lifechat',
+    meta: {
+      requiresAuth: true
     },
-    {
-      path: '/lifechat',
-      name: 'Lifechat',
-      meta: {
-        requiresAuth: true
-      },
-      component: Lifechat
-    },
+    component: Lifechat
+  }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser;
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  if (requiresAuth && !currentUser) next({
-    path: '/'
-  });
-  else if (!requiresAuth && currentUser) next({
-    path: '/home'
-  });
-  else next();
-});
+  const currentUser = firebase.auth().currentUser
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if (requiresAuth && !currentUser) {
+    next({
+      path: '/'
+    })
+  } else if (!requiresAuth && currentUser) {
+    next({
+      path: '/home'
+    })
+  } else next()
+})
 
-export default router;
+export default router

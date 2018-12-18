@@ -18,42 +18,42 @@
 </template>
 <script>
 // @ is an alias to /src
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/database'
 export default {
-  name: "firebase",
+  name: 'firebase',
   components: {},
-  data() {
+  data () {
     return {
-      msg: "",
+      msg: '',
       user: null,
       messages: []
-    };
+    }
   },
   methods: {
-    login() {
-      console.log("in login");
-      var provider = new firebase.auth.GoogleAuthProvider();
+    login () {
+      console.log('in login')
+      var provider = new firebase.auth.GoogleAuthProvider()
       firebase
         .auth()
         .signInWithPopup(provider)
         .then(result => {
           // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
+          var token = result.credential.accessToken
           // The signed-in user info.
-          var user = result.user;
+          var user = result.user
           // let user = firebase.auth().currentUser;
-          this.user = user;
-          console.log(user);
-          console.log(user.displayName);
-          console.log(user.email);
+          this.user = user
+          console.log(user)
+          console.log(user.displayName)
+          console.log(user.email)
 
           // Direct to HOME
-          window.location = "/#/home";
+          window.location = '/#/home'
         })
-        .catch(function(error) {
-          alert("error" + error.message);
+        .catch(function (error) {
+          alert('error' + error.message)
           // // Handle Errors here.
           // var errorCode = error.code;
           // var errorMessage = error.message;
@@ -62,52 +62,52 @@ export default {
           // // The firebase.auth.AuthCredential type that was used.
           // var credential = error.credential;
           // // ...
-        });
+        })
     },
-    logout() {
+    logout () {
       firebase
         .auth()
         .signOut()
-        .then(function() {
-          console.log("Sign-out successful");
+        .then(function () {
+          console.log('Sign-out successful')
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // An error happened.
-          alert("Logout failed");
-        });
+          alert('Logout failed')
+        })
     },
-    writeNewPost() {
-      console.log(this.user.displayName);
-      console.log(this.msg);
+    writeNewPost () {
+      console.log(this.user.displayName)
+      console.log(this.msg)
       const post = {
         name: this.user.displayName,
         body: this.msg,
-        date: new Date().toLocaleString("en-US")
-      };
+        date: new Date().toLocaleString('en-US')
+      }
       const newPostKey = firebase
         .database()
         .ref()
-        .child("mainChat")
-        .push().key;
-      const updates = {};
-      updates[newPostKey] = post;
+        .child('mainChat')
+        .push().key
+      const updates = {}
+      updates[newPostKey] = post
       firebase
         .database()
-        .ref("mainChat")
-        .update(updates);
-      this.msg = null;
-      this.getPosts();
+        .ref('mainChat')
+        .update(updates)
+      this.msg = null
+      this.getPosts()
     },
-    getPosts() {
+    getPosts () {
       firebase
         .database()
-        .ref("mainChat")
-        .on("value", data => {
-          this.messages = data.val();
-        });
+        .ref('mainChat')
+        .on('value', data => {
+          this.messages = data.val()
+        })
     }
   }
-};
+}
 </script>
 <style scoped>
 button {

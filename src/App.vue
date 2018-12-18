@@ -2,59 +2,93 @@
 <template>
   <div id="app" :style="{ background: 'url(' + bgImage + ')' }">
     <div class="container-fluid w-100">
-      <div class="d-flex justify-content-center">
-        <nav id="navLanding" class="navbar navbar-expand-lg m-4">
-          <div v-if="!checkLanding">
-            <!-- <div class="col-12 d-flex justify-content-end">
-              <Logout/>
-            </div>-->
-            <b-nav class="d-flex align-items-center justify-content-center">
-              <b-nav-item class="text-light bg-light m-2" style="font-size: 22px">
-                <router-link to="/home">Home</router-link>
+      <div v-if="!checkLanding">
+        <!-- NAVBAR START -->
+        <nav
+          id="navLanding"
+          class="navbar navbar-expand-lg d-flex justify-content-between shadow-sm"
+        >
+          <!-- nav FLEX ELEMENT  -->
+          <div id="mainLogoBig" class="float-left" v-on:click="infoAlert()">
+            <img class="mainLogo float-left text-left pr-2" src="./assets/007-champion.png" alt>
+            <p
+              class="pr-2"
+              style="font-size: 9px; margin-bottom: 0px;"
+              v-on:click="infoAlert()"
+            >Info</p>
+          </div>
+
+          <!-- nav FLEX ELEMENT  -->
+          <div v-if="!checkLanding" class="d-flex justify-content-between">
+            <b-nav type="dark">
+              <b-nav-item class="text-light bg-light" style="font-size: 22px">
+                <router-link to="/home">
+                  <!-- <font-awesome-icon class="homeIcon" icon="home"/> -->
+                  <img class="icon" src="./assets/home.png" alt>
+                </router-link>
+                <p style="font-size: 9px; margin-bottom: 0px">Home</p>
               </b-nav-item>
-              <b-nav-item class="text-light bg-light m-2" style="font-size: 22px">
-                <router-link :to="{ name: 'Teams', params: { teams: this.teams } }">Teams</router-link>
+
+              <b-nav-item class="text-light bg-light" style="font-size: 22px ">
+                <router-link :to="{ name: 'Teams', params: { teams: this.teams } }">
+                  <img class="icon" src="./assets/teamLogo.png" alt>
+                </router-link>
+                <p style="font-size: 9px; margin-bottom: 0px">Teams</p>
               </b-nav-item>
-              <b-nav-item class="text-light bg-light m-2" style="font-size: 22px">
-                <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">Matches</router-link>
+
+              <b-nav-item class="text-light bg-light" style="font-size: 22px">
+                <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">
+                  <img class="icon" src="./assets/match.png" alt>
+                </router-link>
+                <p style="font-size: 9px; margin-bottom: 0px">Matches</p>
               </b-nav-item>
-              <div class="d-flex align-items-center">
-                <b-dropdown
-                  id="ddown1"
-                  text="More"
-                  variant="link"
-                  size="lg"
-                  class="text-light bg-light m-2"
-                  style="font-size: 22px; width: 120px; height:53px"
-                >
-                  <b-nav-item class="text-light bg-light m-2" style="font-size: 18px">
-                    <router-link class="d-flex justify-content-center" to="/lifechat">
-                      <font-awesome-icon class="comments" icon="comments"/>
-                    </router-link>
-                  </b-nav-item>
-                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 18px">
-                    <router-link
-                      :to="{ name: 'More', params: { teams: this.teams } }"
-                    >Standings / Scorers</router-link>
-                  </b-nav-item>
-                  <!-- <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 22px">
-                    <router-link :to="{ name: 'More', params: { teams: this.teams } }">Scorers</router-link>
-                  </b-nav-item>-->
-                  <b-nav-item class="text-light bg-light m-2" href="/more" style="font-size: 18px">
-                    <Logout/>
-                  </b-nav-item>
-                </b-dropdown>
-              </div>
+            </b-nav>
+          </div>
+
+          <!-- nav FLEX ELEMENT  -->
+          <div class="dropdown p-0">
+            <b-nav>
+              <b-nav-item-dropdown
+                id="ddown1"
+                variant="text"
+                text="More"
+                size="lg"
+                class="text-dark btn-light"
+                style="font-size: 12px; background-color: white; color:black"
+                right
+              >
+                <b-nav-item id="whiteMore" class="more text-light">
+                  <router-link id="whiteMore" class="more" to="/lifechat">
+                    <font-awesome-icon class="comments" icon="comment"/>
+                    <!-- Chat -->
+                    &nbsp;Chat
+                  </router-link>
+                </b-nav-item>
+
+                <b-nav-item id="whiteMore" class="more text-light" href="/more">
+                  <router-link
+                    id="whiteMore"
+                    class="more"
+                    :to="{ name: 'More', params: { teams: this.teams } }"
+                  >
+                    <font-awesome-icon class="comments" icon="comment"/>&nbsp;Scorers
+                  </router-link>
+                </b-nav-item>
+
+                <b-nav-item id="whiteMore" class="more text-light" href="/more">
+                  <Logout/>&nbsp;Logout
+                </b-nav-item>
+              </b-nav-item-dropdown>
             </b-nav>
           </div>
         </nav>
+        <!-- NAVBAR END -->
       </div>
     </div>
 
     <router-view/>
   </div>
 </template>
-
 
 <script>
 import Logout from "./components/Logout.vue";
@@ -64,10 +98,12 @@ export default {
   components: {
     Logout
   },
+
   data() {
     return {
       teams: [],
-      image: require("./assets/football-1406106_1920.jpg")
+      image: require("./assets/football-1406106_1920.jpg"),
+      img: require("./assets/icon-football.png")
     };
   },
   computed: {
@@ -152,6 +188,9 @@ export default {
             "https://s.glbimg.com/es/sde/f/equipes/2018/03/11/benfica.svg"
         }
       ];
+    },
+    infoAlert: function() {
+      alert("info and help: tina@gmail.com");
     }
   },
   created() {
@@ -187,6 +226,8 @@ body {
   width: 100%;
   height: 100%;
   opacity: 1;
+  margin: 0;
+  padding: 0;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -194,6 +235,15 @@ body {
 </style>
 
 <style scoped>
+a,
+a:hover,
+span {
+  color: black;
+}
+svg {
+  color: black;
+}
+
 #app {
   width: 100%;
   min-height: 100vh;
@@ -206,7 +256,13 @@ body {
   -o-background-size: cover;
   background-size: cover;
   text-align: center;
-  color: #2c3e50;
+  color: black;
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
 #nav {
@@ -215,24 +271,80 @@ body {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: black;
   text-decoration: none;
 }
 
 a.nav-link {
-  width: 120px;
-  height: 53px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: white;
+  margin: 0 auto;
+  color: black;
+  white-space: nowrap;
 }
 
-button#ddown1 {
-  font-weight: bold;
-  color: #2c3e50;
-  width: 120px;
-  height: 53px;
-  padding: 0 auto;
+nav#navLanding {
+  background: white;
+  height: 90px;
+}
+
+img.mainLogo {
+  width: 40px;
+  height: 40px;
+}
+
+.more {
+  color: black;
+}
+
+#whiteMore a.nav-link {
+  color: black;
+}
+
+.b-nav-item-dropdown {
+  /* width: 120px; */
+}
+
+#whiteMore.nav-item.more.text-light {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+a #ddown1 span {
+  color: black;
+}
+
+label #ddown1 .dropdown-menu {
+  width: 100px;
+}
+
+.icon {
+  height: 35px;
+  width: 35px;
+}
+
+.info {
+  height: 35px;
+  width: 35px;
+}
+
+@media only screen and (max-width: 450px) and (min-width: 0px) {
+  #navText {
+    display: inline;
+  }
+
+  .icon {
+    height: 27px;
+    width: 27px;
+  }
+
+  .info {
+    height: 27px;
+    width: 27px;
+  }
 }
 </style>

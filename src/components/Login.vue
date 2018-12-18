@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
-    <button class="btn btn-dark" v-on:click="login()">Login</button>
-  </div>
+  <button v-if="color === 'red'" class="btn-danger" v-on:click="loginGoogle()">{{ btnMsg }}</button>
+  <button v-else-if="color === 'blue'" class="btn-primary" v-on:click="loginFB()">{{ btnMsg }}</button>
+  <button v-else class="btn-default" v-on:click="loginMail()">{{ btnMsg }}</button>
 </template>
 
 <script>
@@ -13,14 +13,17 @@ import router from "../router.js";
 
 export default {
   name: "login",
-  components: {},
+  props: {
+    color: String,
+    btnMsg: String
+  },
   data() {
     return {
       user: null
     };
   },
   methods: {
-    login() {
+    loginGoogle() {
       console.log("in login");
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase
@@ -33,29 +36,26 @@ export default {
           var user = result.user;
           // let user = firebase.auth().currentUser;
           this.user = user;
-          console.log(user);
-          console.log(user.displayName);
-          console.log(user.email);
+          // move to home after login
           this.$router.push({ path: "/home" });
         })
         .catch(function(error) {
           alert("error" + error.message);
-          // // Handle Errors here.
-          // var errorCode = error.code;
-          // var errorMessage = error.message;
-          // // The email of the user's account used.
-          // var email = error.email;
-          // // The firebase.auth.AuthCredential type that was used.
-          // var credential = error.credential;
-          // // ...
         });
-    }
+    },
+    loginFB() {
+      // do something
+    },
+    loginMail() {}
   }
 };
 </script>
 
 <style scoped>
 button {
-  margin: 30px;
+  font-weight: bold;
+  margin: 6px;
+  width: 250px;
+  border-radius: 10px;
 }
 </style>

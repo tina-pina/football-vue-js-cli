@@ -11,55 +11,55 @@
 </template>
 
 <script>
-import Team from "@/components/Team.vue";
-import Vue from "vue";
+import Team from '@/components/Team.vue'
+import Vue from 'vue'
 
 export default {
-  name: "Teams",
+  name: 'Teams',
   components: {
     Team
   },
-  data() {
+  data () {
     return {
       allTeams: this.$route.params.teams,
       teamInfo: {},
       selected: null,
       teamSelected: false,
       location: {}
-    };
+    }
   },
   methods: {
-    teamUpdate: function(event) {
-      if (!event) return;
+    teamUpdate: function (event) {
+      if (!event) return
 
-      let teamID = event;
-      let url = `https://api.football-data.org/v2/teams/${teamID}`;
-      let header = { "X-Auth-Token": "a43af3a65b2b477c979e6b354684816b" };
+      let teamID = event
+      let url = `https://api.football-data.org/v2/teams/${teamID}`
+      let header = { 'X-Auth-Token': 'a43af3a65b2b477c979e6b354684816b' }
 
       fetch(url, { headers: header })
         .then(response => {
           if (response.ok) {
-            console.log("Request succeeded: " + response.statusText);
-            return response.json();
+            console.log('Request succeeded: ' + response.statusText)
+            return response.json()
           }
-          throw new Error(response.statusText);
+          throw new Error(response.statusText)
         })
         .then(json => {
-          this.teamInfo = json;
+          this.teamInfo = json
 
           var addressObj = {
             address_line_1: this.teamInfo.venue
-          };
+          }
 
           Vue.$geocoder.send(addressObj, response => {
-            console.log(response);
-            this.location = response.results[0].geometry.location; // {lat: ..., lng: ...}
-          });
-          this.teamSelected = true;
-        });
+            console.log(response)
+            this.location = response.results[0].geometry.location // {lat: ..., lng: ...}
+          })
+          this.teamSelected = true
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped>

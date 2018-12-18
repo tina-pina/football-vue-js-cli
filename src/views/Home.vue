@@ -3,6 +3,56 @@
   <div class="home">
     <h1 class="m-5 font-weight-bold">NEWS</h1>
 
+    <b-carousel
+      id="carousel1"
+      style="text-shadow: 1px 1px 2px #333;"
+      controls
+      indicators
+      background="#ababab"
+      :interval="4000"
+      img-width="1024"
+      img-height="480"
+      v-model="slide"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
+    >
+      <!-- Text slides with image -->
+      <b-carousel-slide
+        style="width: 375px; height: 175px"
+        :img-src="require('../assets/uefa-champions-league-vector.jpg')"
+      ></b-carousel-slide>
+
+      <!-- Slides with custom text -->
+      <b-carousel-slide
+        img-src="https://images.unsplash.com/photo-1473976345543-9ffc928e648d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1385&q=80"
+      ></b-carousel-slide>
+
+      <!-- Slides with image only -->
+      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
+
+      <!-- Slides with img slot -->
+      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+      <b-carousel-slide>
+        <img
+          slot="img"
+          class="d-block img-fluid w-100"
+          width="1024"
+          height="480"
+          src="https://picsum.photos/1024/480/?image=55"
+          alt="image slot"
+        >
+      </b-carousel-slide>
+
+      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          eros felis, tincidunt a tincidunt eget, convallis vel est. Ut pellentesque
+          ut lacus vel interdum.
+        </p>
+      </b-carousel-slide>
+    </b-carousel>
+
     <div class="container">
       <div class="row">
         <!-- start collapse -->
@@ -56,12 +106,10 @@
         <!-- end collapse -->
       </div>
     </div>
-
-    <footer>
-      <p id="external">
-        <a v-bind:href="'https://newsapi.org/'">Powered by NewsAPI</a>
-      </p>
-    </footer>
+    <p id="external">
+      <a v-bind:href="'https://newsapi.org/'">Powered by NewsAPI</a>
+    </p>
+    <Reference/>
   </div>
 </template>
 
@@ -69,19 +117,35 @@
 // import Lifechat from "../views/Lifechat.vue";
 
 import firebase from "firebase/app";
+import Reference from "@/components/Reference.vue";
 
 export default {
   name: "home",
+  components: {
+    Reference
+  },
   data() {
     return {
       articles: [],
       showCollapse: true,
-      isActive: null
+      isActive: null,
+      slide: 0,
+      sliding: null,
+      references: false
     };
   },
   methods: {
     toggleItem(index) {
       this.isActive = index;
+    },
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
+    },
+    greet: function(event) {
+      this.references = !this.references;
     }
   },
   filters: {
@@ -171,8 +235,20 @@ footer #external a {
   font-weight: bold;
 }
 
+footer #icons a {
+  color: black;
+}
+
 footer p {
   margin: 0;
   padding: 2rem;
+}
+
+#icons {
+  color: white;
+}
+
+a.carousel-control-prev a {
+  color: black;
 }
 </style>
