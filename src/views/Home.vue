@@ -18,35 +18,46 @@
     >
       <!-- Text slides with image -->
       <b-carousel-slide
-        style="width: 100%; height: 175px;"
+        style="width: 100%; height: 165px;"
         img-src="http://media.contentapi.ea.com/content/www-easports/en_US/fifa/ultimate-team/news/2018/uefa-champions-league-edition-fut-items/_jcr_content/imageShare.img.jpg"
       ></b-carousel-slide>
       <!-- :img-src="require('../assets/uefa-champions-league-vector.jpg')" -->
       <!-- Slides with custom text -->
       <b-carousel-slide
-        style="width: 100%; height: 175px"
+        style="width: 100%; height: 165px"
         img-src="https://images.unsplash.com/photo-1473976345543-9ffc928e648d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1385&q=80"
       ></b-carousel-slide>
 
       <!-- Slides with image only -->
       <b-carousel-slide
-        style="width: 100%; height: 175px"
+        style="width: 100%; height: 165px"
         img-src="https://images.unsplash.com/photo-1508697371770-529139794f8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1018&q=80"
       ></b-carousel-slide>
 
       <!-- Slides with img slot -->
       <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
       <b-carousel-slide
-        style="width: 100%; height: 175px"
+        style="width: 100%; height: 165px"
         :img-src="require('../assets/sport-3865402_640.jpg')"
-      >
-        <!-- <img
-          slot="img"
-          class="d-block img-fluid w-100"
-          
-          alt="image slot"
-        >-->
-      </b-carousel-slide>
+      ></b-carousel-slide>
+      <b-carousel-slide
+        style="width: 100%; height: 165px"
+        img-src="https://cdn.pixabay.com/photo/2016/08/15/19/37/football-stadium-1596320_960_720.jpg"
+      ></b-carousel-slide>
+
+      <b-carousel-slide
+        style="width: 100%; height: 165px"
+        img-src="https://cdn.pixabay.com/photo/2017/11/02/09/27/besiktas-2910497_960_720.jpg"
+      ></b-carousel-slide>
+
+      <b-carousel-slide
+        style="width: 100%; height: 165px"
+        img-src="https://cdn.pixabay.com/photo/2016/11/05/04/37/football-1799462_960_720.jpg"
+      ></b-carousel-slide>
+      <b-carousel-slide
+        style="width: 100%; height: 165px"
+        img-src="https://cdn.pixabay.com/photo/2018/02/04/20/17/garry-mendes-rodrigues-3130779_960_720.jpg"
+      ></b-carousel-slide>
     </b-carousel>
 
     <div class="container">
