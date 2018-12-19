@@ -16,7 +16,8 @@ import {
   faHandPointer,
   faComment,
   faSignOutAlt,
-  faHome
+  faHome,
+  faTrophy
 } from '@fortawesome/free-solid-svg-icons'
 import {
   FontAwesomeIcon
@@ -59,6 +60,7 @@ library.add(faHandPointer)
 library.add(faComment)
 library.add(faSignOutAlt)
 library.add(faHome)
+library.add(faTrophy)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

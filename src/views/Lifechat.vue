@@ -1,14 +1,25 @@
 <template>
   <div id="lifechat">
     <div class="container">
-      <div class="send row d-flex align-items-center justify-content-center">
-        <div
-          class="col-12 chatBox d-flex align-items-center justify-content-center flex-column p-3"
-        >
-          <input type="text" class="form-control col-6" v-model="msg">
-          <button class="btn btn-success m-4" v-on:click="writeNewPost()">Send</button>
-
-          <hr>
+      <div class="row">
+        <nav class="col-12 chatHeader d-flex justify-content-between align-items-center">
+          <p>x</p>
+          <h1>Live chat</h1>
+          <p>?</p>
+        </nav>
+      </div>
+      <div class="send row">
+        <div class="col-12 chatBox p-3 pt-5 m-2">
+          <div class="d-flex align-items-center justify-content-center">
+            <input
+              type="text"
+              class="form-control col-6 m-2"
+              style="width: 200px !important;
+  height: 50px !important;"
+              v-model="msg"
+            >
+            <button class="btn btn-success m-2" v-on:click="writeNewPost()">Send</button>
+          </div>
         </div>
       </div>
     </div>
@@ -17,11 +28,24 @@
       <div>
         <!-- el2 -->
         <!-- your scrollable content -->
-        <div class="message bubble" v-for="(msg, index) in messages" :key="index">
-          <div class="messageBox d-flex flex-column justify-content-start">
-            <p class="name border-bottom-3 text-center">{{msg.name}}</p>
-            <p class="body text-left">{{msg.body}}</p>
-            <p class="date text-left">{{msg.date}}</p>
+        <div id="scrollme" class="chat">
+          <div v-for="(msg, index) in messages" :key="index">
+            <div v-if="user.displayName === msg.name">
+              <!-- My Message -->
+              <div class="message talk-bubble tri-right left-in">
+                <p class="name border-bottom-3 text-center">{{msg.name}}</p>
+                <p class="body text-left">{{msg.body}}</p>
+                <p class="date text-left">{{msg.date}}</p>
+              </div>
+            </div>
+            <div v-else>
+              <!-- Someone else`s Message -->
+              <div class="message talk-bubble tri-right btm-right">
+                <p class="name border-bottom-3 text-center">{{msg.name}}</p>
+                <p class="body text-left">{{msg.body}}</p>
+                <p class="date text-left">{{msg.date}}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -41,12 +65,20 @@ export default {
     return {
       msg: "",
       user: null,
-      messages: []
+      currentUserObj: {},
+      messages: [],
+      index: 0,
+      nextIndex: 1,
+      UseBubbleOne: false,
+      UseBubbleTwo: false
     };
+  },
+  updated() {
+    this.scroll();
   },
   methods: {
     writeNewPost() {
-      console.log(this.user.displayName);
+      // console.log(this.user.displayName);
       console.log(this.msg);
       var options = {
         year: "numeric",
@@ -81,6 +113,11 @@ export default {
           this.messages = data.val();
           // console.log(this.messages);
         });
+    },
+    scroll() {
+      document.getElementById("scrollme").scrollTop = document.getElementById(
+        "scrollme"
+      ).scrollHeight;
     }
   },
   created: function() {
@@ -97,8 +134,29 @@ export default {
   color: darkblue;
 }
 
+nav.chatHeader {
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 50px;
+}
+
+h1 {
+  color: #28a745;
+}
+
 .chatBox {
-  margin: 20px;
+  margin: 30px;
+  height: 160px;
+}
+
+input.form-control {
+  width: 200px;
+  height: 100px;
+}
+
+.chat {
+  overflow-y: scroll;
+  height: 600px;
+  scroll-behavior: smooth;
 }
 
 .messageBox p.name {
@@ -106,60 +164,85 @@ export default {
   color: brown;
 }
 
-p.name {
-  /* background-color: #28a745;
-  border-color: #28a745; */
-  border-radius: 25px;
-}
-
-p.date {
-  background-color: #007bff;
-  border-color: #007bff;
-  font-size: 10px;
-}
-
-p.body {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: white;
-  max-width: 230px;
-  display: inline-block;
+p.text-left {
+  color: black;
+  /* display: inline-block; */
   word-wrap: break-word;
 }
 
-.bubble {
+.talk-bubble {
+  margin: 40px;
+  display: inline-block;
   position: relative;
-  background: #007bff;
-  border: 1px solid #007bff;
-  max-width: 250px;
-  padding: 10px;
-  font-family: arial;
-  margin: 20px auto;
-  font-size: 14px;
-  border-radius: 6px;
-}
-.bubble:after,
-.bubble:before {
-  right: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
+  width: 200px;
+  height: auto;
+  background-color: lightyellow;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.bubble:after {
-  border-color: rgba(255, 255, 204, 0);
-  border-right-color: #007bff;
-  border-width: 15px;
-  margin-top: -15px;
+.border {
+  border: 8px solid #666;
 }
-.bubble:before {
-  border-color: rgba(255, 204, 0, 0);
-  border-right-color: #007bff;
-  border-width: 16px;
-  margin-top: -16px;
+.round {
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
 }
+
+/* bubble no. 1 start */
+/* Right triangle, left side slightly down */
+.tri-right.border.left-in:before {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -40px;
+  right: auto;
+  top: 30px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.left-in:after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -20px;
+  right: auto;
+  top: 38px;
+  bottom: auto;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+
+/* bubble no. 1 end */
+
+/* bubble no. 2 start */
+
+/*Right triangle, placed bottom right side slightly in*/
+.tri-right.border.btm-right:before {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -8px;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.btm-right:after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 0px;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+/* bubble no. 2 end */
 </style>

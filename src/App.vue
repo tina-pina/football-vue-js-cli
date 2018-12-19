@@ -50,7 +50,7 @@
             <b-nav>
               <b-nav-item-dropdown
                 id="ddown1"
-                variant="text"
+                variant="info"
                 text="More"
                 size="lg"
                 class="text-dark btn-light"
@@ -71,12 +71,12 @@
                     class="more"
                     :to="{ name: 'More', params: { teams: this.teams } }"
                   >
-                    <font-awesome-icon class="comments" icon="comment"/>&nbsp;Scorers
+                    <font-awesome-icon class="trophy" icon="trophy"/>&nbsp;Scorers
                   </router-link>
                 </b-nav-item>
 
-                <b-nav-item id="whiteMore" class="more text-light" href="/more">
-                  <Logout/>&nbsp;Logout
+                <b-nav-item id="whiteMore" class="more logout text-light" href="/more">
+                  <Logout/>&nbsp;
                 </b-nav-item>
               </b-nav-item-dropdown>
             </b-nav>
@@ -301,14 +301,15 @@ img.mainLogo {
 .more {
   color: black;
 }
+/* 
+#whiteMore .logout {
+  white-space: nowrap;
+}
 
 #whiteMore a.nav-link {
   color: black;
-}
-
-.b-nav-item-dropdown {
-  /* width: 120px; */
-}
+  white-space: nowrap;
+} */
 
 #whiteMore.nav-item.more.text-light {
   background-color: rgba(255, 255, 255, 0.7);

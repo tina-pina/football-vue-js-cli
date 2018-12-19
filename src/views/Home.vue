@@ -19,9 +19,9 @@
       <!-- Text slides with image -->
       <b-carousel-slide
         style="width: 375px; height: 175px"
-        :img-src="require('../assets/uefa-champions-league-vector.jpg')"
+        img-src="http://media.contentapi.ea.com/content/www-easports/en_US/fifa/ultimate-team/news/2018/uefa-champions-league-edition-fut-items/_jcr_content/imageShare.img.jpg"
       ></b-carousel-slide>
-
+      <!-- :img-src="require('../assets/uefa-champions-league-vector.jpg')" -->
       <!-- Slides with custom text -->
       <b-carousel-slide
         style="width: 375px; height: 175px"
@@ -36,24 +36,17 @@
 
       <!-- Slides with img slot -->
       <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-      <!-- <b-carousel-slide>
-        <img
+      <b-carousel-slide
+        style="width: 375px; height: 175px"
+        :img-src="require('../assets/sport-3865402_640.jpg')"
+      >
+        <!-- <img
           slot="img"
           class="d-block img-fluid w-100"
-          width="1024"
-          height="480"
-          src="https://picsum.photos/1024/480/?image=55"
+          
           alt="image slot"
-        >
-      </b-carousel-slide>-->
-      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <!-- <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          eros felis, tincidunt a tincidunt eget, convallis vel est. Ut pellentesque
-          ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>-->
+        >-->
+      </b-carousel-slide>
     </b-carousel>
 
     <div class="container">
