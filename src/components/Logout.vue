@@ -37,6 +37,8 @@ export default {
         .signOut()
         .then(function() {
           console.log("Sign-out successful");
+          // move to home after login
+          this.$router.push({ path: "/home" });
         })
         .catch(function(error) {
           // An error happened.
