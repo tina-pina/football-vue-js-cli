@@ -32,7 +32,10 @@
           <div v-for="(msg, index) in messages" :key="index">
             <div v-if="user.displayName === msg.name">
               <!-- My Message -->
-              <div class="message talk-bubble tri-right left-in">
+              <div
+                class="message talk-bubble tri-right left-in"
+                style="background-color: lightblue;"
+              >
                 <p class="name border-bottom-3 text-center">{{msg.name}}</p>
                 <p class="body text-left">{{msg.body}}</p>
                 <p class="date text-left">{{msg.date}}</p>
@@ -140,7 +143,8 @@ nav.chatHeader {
 }
 
 h1 {
-  color: #28a745;
+  color: red;
+  margin: 0;
 }
 
 .chatBox {
@@ -171,7 +175,7 @@ p.text-left {
 }
 
 .talk-bubble {
-  margin: 40px;
+  margin: 20px;
   display: inline-block;
   position: relative;
   width: 200px;
@@ -214,7 +218,7 @@ p.text-left {
   top: 38px;
   bottom: auto;
   border: 12px solid;
-  border-color: lightyellow lightyellow transparent transparent;
+  border-color: lightblue lightblue transparent transparent;
 }
 
 /* bubble no. 1 end */

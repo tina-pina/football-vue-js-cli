@@ -18,26 +18,26 @@
     >
       <!-- Text slides with image -->
       <b-carousel-slide
-        style="width: 375px; height: 175px"
+        style="width: 100%; height: 175px;"
         img-src="http://media.contentapi.ea.com/content/www-easports/en_US/fifa/ultimate-team/news/2018/uefa-champions-league-edition-fut-items/_jcr_content/imageShare.img.jpg"
       ></b-carousel-slide>
       <!-- :img-src="require('../assets/uefa-champions-league-vector.jpg')" -->
       <!-- Slides with custom text -->
       <b-carousel-slide
-        style="width: 375px; height: 175px"
+        style="width: 100%; height: 175px"
         img-src="https://images.unsplash.com/photo-1473976345543-9ffc928e648d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1385&q=80"
       ></b-carousel-slide>
 
       <!-- Slides with image only -->
       <b-carousel-slide
-        style="width: 375px; height: 175px"
+        style="width: 100%; height: 175px"
         img-src="https://images.unsplash.com/photo-1508697371770-529139794f8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1018&q=80"
       ></b-carousel-slide>
 
       <!-- Slides with img slot -->
       <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
       <b-carousel-slide
-        style="width: 375px; height: 175px"
+        style="width: 100%; height: 175px"
         :img-src="require('../assets/sport-3865402_640.jpg')"
       >
         <!-- <img
