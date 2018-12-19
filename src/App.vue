@@ -75,7 +75,7 @@
                   </router-link>
                 </b-nav-item>
 
-                <b-nav-item id="whiteMore" class="more logout text-light" href="/more">
+                <b-nav-item id="whiteMore" class="more logout text-light" href="/">
                   <Logout/>&nbsp;
                 </b-nav-item>
               </b-nav-item-dropdown>
