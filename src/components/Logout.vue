@@ -7,15 +7,6 @@
       icon="sign-out-alt"
     />Logout
   </div>
-
-  <!-- <div class="logout">
-    <button
-      class="btn btn-light d-flex justify-content-center align-items-center"
-      v-on:click="logout()"
-    >
-      <font-awesome-icon class="signOut mx-auto fa-w-5" style="color: #007bff" icon="sign-out-alt"/>
-    </button>
-  </div>-->
 </template>
 
 <script>
@@ -45,6 +36,25 @@ export default {
           alert("Logout failed");
         });
     }
+    // logout() {
+    //   firebase
+    //     .auth()
+    //     .onAuthStateChanged(user => {
+    //       if (user) {
+    //         if (user === null) {
+    //           firebase.auth().signOut();
+    //         } else {
+    //           this.$router.push("/home");
+    //         }
+    //       } else {
+    //         // will get to here from a logout event
+    //         this.$router.push("/");
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //       alert("logout failed");
+    //     });
+    // }
   }
 };
 </script>

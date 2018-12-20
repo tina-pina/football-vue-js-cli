@@ -36,17 +36,17 @@
                 class="message talk-bubble tri-right left-in"
                 style="background-color: lightblue;"
               >
-                <p class="name border-bottom-3 text-center">{{msg.name}}</p>
+                <p class="name border-bottom-3 text-center" style="font-weight: bold;">{{msg.name}}</p>
                 <p class="body text-left">{{msg.body}}</p>
-                <p class="date text-left">{{msg.date}}</p>
+                <p class="date text-left" style="font-size: 11px">{{msg.date}}</p>
               </div>
             </div>
             <div v-else>
               <!-- Someone else`s Message -->
               <div class="message talk-bubble tri-right btm-right">
-                <p class="name border-bottom-3 text-center">{{msg.name}}</p>
+                <p class="name border-bottom-3 text-center" style="font-weight: bold;">{{msg.name}}</p>
                 <p class="body text-left">{{msg.body}}</p>
-                <p class="date text-left">{{msg.date}}</p>
+                <p class="date text-left" style="font-size: 11px">{{msg.date}}</p>
               </div>
             </div>
           </div>
