@@ -81,7 +81,6 @@ export default {
   },
   methods: {
     writeNewPost() {
-      // console.log(this.user.displayName);
       console.log(this.msg);
       var options = {
         year: "numeric",

@@ -237,8 +237,12 @@ h5.card-text {
   font-weight: bold;
 }
 
-footer #external a {
-  color: black;
+#external {
+  margin-top: 20px;
+}
+
+#external a {
+  color: white;
   font-weight: bold;
 }
 
