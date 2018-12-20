@@ -1,7 +1,7 @@
 <template>
   <button v-if="color === 'red'" class="btn-danger" v-on:click="loginGoogle()">{{ btnMsg }}</button>
   <button v-else-if="color === 'blue'" class="btn-primary" v-on:click="loginFB()">{{ btnMsg }}</button>
-  <button v-else class="btn-default" v-on:click="loginMail()">{{ btnMsg }}</button>
+  <button v-else class="btn-secondary" v-on:click="loginMail()">{{ btnMsg }}</button>
 </template>
 
 <script>
