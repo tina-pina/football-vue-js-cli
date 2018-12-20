@@ -28,19 +28,40 @@ export default {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
-        .signInWithPopup(provider)
-        .then(result => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          // let user = firebase.auth().currentUser;
-          this.user = user;
-          // move to home after login
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(function() {
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+
+          return firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(result => {
+              console.log(result.additionalUserInfo.profile.name);
+              console.log(result.credential.accessToken);
+
+              // // This gives you a Google Access Token. You can use it to access the Google API.
+              // var token = result.credential.accessToken;
+              // // The signed-in user info.
+              // var user = result.user;
+              // // let user = firebase.auth().currentUser;
+              // this.user = user;
+              // move to home after login
+            })
+            .catch(function(error) {
+              alert("error:" + error.message);
+            });
+        })
+        .then(() => {
           this.$router.push({ path: "/home" });
         })
         .catch(function(error) {
-          alert("error" + error.message);
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
         });
     },
     loginFB() {

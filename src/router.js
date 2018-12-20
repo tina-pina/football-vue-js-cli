@@ -12,50 +12,50 @@ Vue.use(Router)
 
 let router = new Router({
   routes: [{
-    path: '/',
-    name: 'Landing',
-    component: Landing
-  },
-  {
-    path: '/home',
-    name: 'Home',
-    meta: {
-      requiresAuth: true
+      path: '/',
+      name: 'Landing',
+      component: Landing
     },
-    component: Home
-  },
-  {
-    path: '/teams',
-    name: 'Teams',
-    meta: {
-      requiresAuth: true
+    {
+      path: '/home',
+      name: 'Home',
+      meta: {
+        requiresAuth: true
+      },
+      component: Home
     },
-    component: Teams
-  },
-  {
-    path: '/matches',
-    name: 'Matches',
-    meta: {
-      requiresAuth: true
+    {
+      path: '/teams',
+      name: 'Teams',
+      meta: {
+        requiresAuth: true
+      },
+      component: Teams
     },
-    component: Matches
-  },
-  {
-    path: '/more',
-    name: 'More',
-    meta: {
-      requiresAuth: true
+    {
+      path: '/matches',
+      name: 'Matches',
+      meta: {
+        requiresAuth: true
+      },
+      component: Matches
     },
-    component: More
-  },
-  {
-    path: '/lifechat',
-    name: 'Lifechat',
-    meta: {
-      requiresAuth: true
+    {
+      path: '/more',
+      name: 'More',
+      meta: {
+        requiresAuth: true
+      },
+      component: More
     },
-    component: Lifechat
-  }
+    {
+      path: '/lifechat',
+      name: 'Lifechat',
+      meta: {
+        requiresAuth: true
+      },
+      component: Lifechat
+    }
   ]
 })
 
@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if (requiresAuth && !currentUser) {
     next({
-      path: '/'
+      path: '/home'
     })
   } else if (!requiresAuth && currentUser) {
     next({
