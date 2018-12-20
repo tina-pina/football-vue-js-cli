@@ -1,6 +1,6 @@
 <template>
   <div class="reference">
-    <button class="btn p-6 m-4" v-on:click="toggleReference($event)">References</button>
+    <button class="btn btn-secondary p-6 m-4" v-on:click="toggleReference($event)">References</button>
     <div v-if="show">
       <div id="icons" class="d-flex flex-column">
         Icons made by
