@@ -29,8 +29,9 @@
         >
           <!-- <b-nav-item class="enter pt-3 pb-3 pl-4 pr-4"> -->
           <Login v-bind:btnMsg="'Login with Google'" :color="'red'"/>
-          <Login v-bind:btnMsg="'Login with Facebook'" :color="'blue'"/>
+          <!-- <Login v-bind:btnMsg="'Login with Facebook'" :color="'blue'"/> -->
           <Login v-bind:btnMsg="'Login with EMail'" :color="''"/>
+          <EmailSignUp/>
           <!-- </b-nav-item> -->
         </b-nav>
       </div>
@@ -39,14 +40,16 @@
 </template>
 
 <script>
-import Login from '@/components/Login.vue'
+import Login from "@/components/Login.vue";
+import EmailSignUp from "@/components/EmailSignUp.vue";
 
 export default {
-  name: 'landing',
+  name: "landing",
   components: {
-    Login
+    Login,
+    EmailSignUp
   }
-}
+};
 </script>
 
 <style scoped>

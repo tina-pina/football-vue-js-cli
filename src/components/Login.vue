@@ -1,7 +1,9 @@
 <template>
-  <button v-if="color === 'red'" class="btn-danger" v-on:click="loginGoogle()">{{ btnMsg }}</button>
-  <button v-else-if="color === 'blue'" class="btn-primary" v-on:click="loginFB()">{{ btnMsg }}</button>
-  <button v-else class="btn-secondary" v-on:click="loginMail()">{{ btnMsg }}</button>
+  <div id="login">
+    <button v-if="color === 'red'" class="btn-danger" v-on:click="loginGoogle()">{{ btnMsg }}</button>
+    <!-- <button v-else-if="color === 'blue'" class="btn-primary" v-on:click="loginFB()">{{ btnMsg }}</button> -->
+    <button v-else class="btn-secondary" v-on:click="loginMail()">{{ btnMsg }}</button>
+  </div>
 </template>
 
 <script>
@@ -43,13 +45,12 @@ export default {
               console.log(result.additionalUserInfo.profile.name);
               console.log(result.credential.accessToken);
 
-              // // This gives you a Google Access Token. You can use it to access the Google API.
+              // // gives a Google Access Token. use to access the Google API.
               // var token = result.credential.accessToken;
               // // The signed-in user info.
               // var user = result.user;
               // // let user = firebase.auth().currentUser;
               // this.user = user;
-              // move to home after login
             })
             .catch(function(error) {
               alert("error:" + error.message);
@@ -63,11 +64,7 @@ export default {
           var errorCode = error.code;
           var errorMessage = error.message;
         });
-    },
-    loginFB() {
-      // do something
-    },
-    loginMail() {}
+    }
   }
 };
 </script>

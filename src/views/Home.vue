@@ -272,25 +272,6 @@ a.carousel-control-prev a {
   color: black;
 }
 
-/* @media screen and (orientation: portrait) and (max-width: 480px) and (min-width: 0px) {
-  .carousel {
-    width: 100%;
-    height: 165px;
-  }
-}
-
-@media screen and (orientation: landscape) and (min-width: 781px) {
-  .carousel {
-    height: 307.5px;
-  }
-}
-
-@media screen and (orientation: portrait) and (min-width: 781px) {
-  .carousel {
-    height: 380px;
-  }
-} */
-
 img {
   background: cover;
 }
