@@ -18,35 +18,7 @@
             >Info</p>
           </div>
 
-          <!-- nav FLEX ELEMENT  -->
-          <div v-if="!checkLanding" class="d-flex justify-content-between">
-            <b-nav type="dark">
-              <b-nav-item class="text-light bg-light" style="font-size: 22px">
-                <router-link to="/home">
-                  <!-- <font-awesome-icon class="homeIcon" icon="home"/> -->
-                  <img class="icon" src="./assets/home.png" alt>
-                </router-link>
-                <p style="font-size: 9px; margin-bottom: 0px">Home</p>
-              </b-nav-item>
-
-              <b-nav-item class="text-light bg-light" style="font-size: 22px ">
-                <router-link :to="{ name: 'Teams', params: { teams: this.teams } }">
-                  <img class="icon" src="./assets/teamLogo.png" alt>
-                </router-link>
-                <p style="font-size: 9px; margin-bottom: 0px">Teams</p>
-              </b-nav-item>
-
-              <b-nav-item class="text-light bg-light" style="font-size: 22px">
-                <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">
-                  <img class="icon" src="./assets/match.png" alt>
-                </router-link>
-                <p style="font-size: 9px; margin-bottom: 0px">Matches</p>
-              </b-nav-item>
-            </b-nav>
-          </div>
-
-          <!-- nav FLEX ELEMENT  -->
-          <div class="dropdown p-0">
+          <div class="dropdown p-0" v-if="!checkLanding">
             <b-nav>
               <b-nav-item-dropdown
                 id="ddown1"
@@ -57,26 +29,45 @@
                 style="font-size: 12px; background-color: white; color:black"
                 right
               >
-                <b-nav-item id="whiteMore" class="more text-light">
-                  <router-link id="whiteMore" class="more" to="/lifechat">
+                <b-nav-item class="text-light bg-light m-2">
+                  <router-link to="/home">
+                    <img class="icon mr-2" src="./assets/home.png">Home
+                  </router-link>
+                </b-nav-item>
+
+                <b-nav-item class="text-light bg-light m-2">
+                  <router-link :to="{ name: 'Teams', params: { teams: this.teams } }">
+                    <img class="icon mr-2" src="./assets/teamLogo.png">Teams
+                  </router-link>
+                </b-nav-item>
+
+                <b-nav-item class="text-light bg-light m-2">
+                  <router-link :to="{ name: 'Matches', params: { teams: this.teams } }">
+                    <img class="icon mr-2" src="./assets/match.png">Matches
+                  </router-link>
+                </b-nav-item>
+
+                <b-nav-item id="whiteMore" class="more text-light m-2">
+                  <router-link class="more" to="/lifechat">
                     <font-awesome-icon class="comments" icon="comment"/>
                     <!-- Chat -->
                     &nbsp;Chat
                   </router-link>
                 </b-nav-item>
 
-                <b-nav-item id="whiteMore" class="more text-light" href="/more">
-                  <router-link
-                    id="whiteMore"
-                    class="more"
-                    :to="{ name: 'More', params: { teams: this.teams } }"
-                  >
+                <b-nav-item id="whiteMore" class="more text-light m-2" href="/more">
+                  <router-link class="more" :to="{ name: 'More', params: { teams: this.teams } }">
                     <font-awesome-icon class="trophy" icon="trophy"/>&nbsp;Scorers
                   </router-link>
                 </b-nav-item>
 
-                <b-nav-item id="whiteMore" class="more logout text-light" href="/">
-                  <Logout/>&nbsp;
+                <b-nav-item
+                  id="whiteMore"
+                  class="more logout text-light m-2"
+                  style="height: 24px"
+                  href="/"
+                >
+                  <Logout/>
                 </b-nav-item>
               </b-nav-item-dropdown>
             </b-nav>
@@ -301,15 +292,6 @@ img.mainLogo {
 .more {
   color: black;
 }
-/* 
-#whiteMore .logout {
-  white-space: nowrap;
-}
-
-#whiteMore a.nav-link {
-  color: black;
-  white-space: nowrap;
-} */
 
 #whiteMore.nav-item.more.text-light {
   background-color: rgba(255, 255, 255, 0.7);
@@ -324,8 +306,8 @@ label #ddown1 .dropdown-menu {
 }
 
 .icon {
-  height: 35px;
-  width: 35px;
+  height: 20px;
+  width: 20px;
 }
 
 .info {
@@ -339,8 +321,8 @@ label #ddown1 .dropdown-menu {
   }
 
   .icon {
-    height: 27px;
-    width: 27px;
+    height: 20px;
+    width: 20px;
   }
 
   .info {

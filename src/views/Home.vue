@@ -8,55 +8,63 @@
       style="text-shadow: 1px 1px 2px #333;"
       controls
       indicators
-      background="#ababab"
-      :interval="4000"
       img-width="1024"
       img-height="480"
+      img-size="cover"
+      background="#ababab"
+      :interval="4000"
       v-model="slide"
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
     >
-      <!-- Text slides with image -->
+      <!-- small size -->
       <b-carousel-slide
-        style="width: 100%; height: 165px;"
-        img-src="http://media.contentapi.ea.com/content/www-easports/en_US/fifa/ultimate-team/news/2018/uefa-champions-league-edition-fut-items/_jcr_content/imageShare.img.jpg"
+        style="object-fit: cover !important"
+        :img-src="require('../assets/imageShare.img.jpg')"
       ></b-carousel-slide>
+
+      <!-- style="width: 100%; height: 165px;" -->
       <!-- :img-src="require('../assets/uefa-champions-league-vector.jpg')" -->
-      <!-- Slides with custom text -->
+      <!-- small size -->
       <b-carousel-slide
-        style="width: 100%; height: 165px"
-        img-src="https://images.unsplash.com/photo-1473976345543-9ffc928e648d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1385&q=80"
+        style="object-fit: cover !important"
+        :img-src="require('../assets/photo-1473976345543-9ffc928e648d.jpeg')"
       ></b-carousel-slide>
 
-      <!-- Slides with image only -->
+      <!-- small size -->
       <b-carousel-slide
-        style="width: 100%; height: 165px"
-        img-src="https://images.unsplash.com/photo-1508697371770-529139794f8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1018&q=80"
+        style="object-fit: cover !important"
+        :img-src="require('../assets/photo-1508697371770-529139794f8b.jpeg')"
       ></b-carousel-slide>
 
-      <!-- Slides with img slot -->
-      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+      <!-- small size -->
       <b-carousel-slide
-        style="width: 100%; height: 165px"
-        :img-src="require('../assets/sport-3865402_640.jpg')"
-      ></b-carousel-slide>
-      <b-carousel-slide
-        style="width: 100%; height: 165px"
-        img-src="https://cdn.pixabay.com/photo/2016/08/15/19/37/football-stadium-1596320_960_720.jpg"
+        style="object-fit: cover !important"
+        :img-src="require('../assets/guy.jpg')"
       ></b-carousel-slide>
 
+      <!-- small size -->
       <b-carousel-slide
-        style="width: 100%; height: 165px"
-        img-src="https://cdn.pixabay.com/photo/2017/11/02/09/27/besiktas-2910497_960_720.jpg"
+        style="object-fit: cover !important"
+        :img-src="require('../assets/football-stadium-1596320_960_720.jpg')"
       ></b-carousel-slide>
 
+      <!-- small size -->
       <b-carousel-slide
-        style="width: 100%; height: 165px"
-        img-src="https://cdn.pixabay.com/photo/2016/11/05/04/37/football-1799462_960_720.jpg"
+        style="object-fit: cover !important"
+        :img-src="require('../assets/besiktas-2910497_960_720.jpg')"
       ></b-carousel-slide>
+
+      <!-- small size -->
       <b-carousel-slide
-        style="width: 100%; height: 165px"
-        img-src="https://cdn.pixabay.com/photo/2018/02/04/20/17/garry-mendes-rodrigues-3130779_960_720.jpg"
+        style="object-fit: cover !important"
+        :img-src="require('../assets/garry-mendes-rodrigues-3130779_960_720.jpg')"
+      ></b-carousel-slide>
+
+      <!-- small size -->
+      <b-carousel-slide
+        style="object-fit: cover !important"
+        :img-src="require('../assets/football-1799462_960_720.jpg')"
       ></b-carousel-slide>
     </b-carousel>
 
@@ -69,6 +77,7 @@
           v-for="(article, index) in articles"
           @click="toggleItem(index)"
           :class="{active: isActive === index}"
+          :key="index"
         >
           <p class="col-3 p-1">
             <font-awesome-icon icon="table"/>
@@ -261,5 +270,28 @@ footer p {
 
 a.carousel-control-prev a {
   color: black;
+}
+
+/* @media screen and (orientation: portrait) and (max-width: 480px) and (min-width: 0px) {
+  .carousel {
+    width: 100%;
+    height: 165px;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 781px) {
+  .carousel {
+    height: 307.5px;
+  }
+}
+
+@media screen and (orientation: portrait) and (min-width: 781px) {
+  .carousel {
+    height: 380px;
+  }
+} */
+
+img {
+  background: cover;
 }
 </style>

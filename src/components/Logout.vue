@@ -2,8 +2,8 @@
   <div class="logout">
     <font-awesome-icon
       v-on:click="logout()"
-      class="signOut mx-auto fa-w-5"
-      style="color: black"
+      class="signOut"
+      style="color: black; white-space: nowrap; margin-right: 5px"
       icon="sign-out-alt"
     />Logout
   </div>
@@ -36,25 +36,6 @@ export default {
           alert("Logout failed");
         });
     }
-    // logout() {
-    //   firebase
-    //     .auth()
-    //     .onAuthStateChanged(user => {
-    //       if (user) {
-    //         if (user === null) {
-    //           firebase.auth().signOut();
-    //         } else {
-    //           this.$router.push("/home");
-    //         }
-    //       } else {
-    //         // will get to here from a logout event
-    //         this.$router.push("/");
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //       alert("logout failed");
-    //     });
-    // }
   }
 };
 </script>

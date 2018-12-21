@@ -148,7 +148,7 @@ h1 {
 
 .chatBox {
   margin: 30px;
-  height: 160px;
+  height: 130px;
 }
 
 input.form-control {
@@ -158,7 +158,7 @@ input.form-control {
 
 .chat {
   overflow-y: scroll;
-  height: 600px;
+  height: 300px;
   scroll-behavior: smooth;
 }
 
@@ -169,7 +169,6 @@ input.form-control {
 
 p.text-left {
   color: black;
-  /* display: inline-block; */
   word-wrap: break-word;
 }
 

@@ -46,6 +46,7 @@
             v-for="(value, key, index) in teamInfo.squad"
             @click="toggleItem(key)"
             :class="{active: isActive === key}"
+            :key="index"
           >
             <div class="memberInfo row d-flex">
               <p class="col-6">{{ value.name }}</p>
@@ -117,11 +118,11 @@
 </template>
 
 <script>
-import GoogleMap from './GoogleMap.vue'
-import Vue from 'vue'
+import GoogleMap from "./GoogleMap.vue";
+import Vue from "vue";
 
 export default {
-  name: 'Team',
+  name: "Team",
   props: {
     teamInfo: Object,
     location: Object // {lat:..., lng:...}
@@ -129,33 +130,33 @@ export default {
   components: {
     GoogleMap
   },
-  data () {
+  data() {
     return {
       showCollapse: true,
       isActive: null,
       googleURL: null,
       showModal: false
-    }
+    };
   },
   methods: {
-    openModal: function () {
-      this.showModal = !this.showModal
+    openModal: function() {
+      this.showModal = !this.showModal;
     },
-    toggleItem (key) {
-      this.isActive = key
+    toggleItem(key) {
+      this.isActive = key;
     }
   },
 
   filters: {
-    formatDate: function (dateString) {
-      let date = new Date(dateString)
-      let year = date.getFullYear()
-      let month = date.getMonth()
-      let days = date.getDate()
-      return year + '-' + month + '-' + days
+    formatDate: function(dateString) {
+      let date = new Date(dateString);
+      let year = date.getFullYear();
+      let month = date.getMonth();
+      let days = date.getDate();
+      return year + "-" + month + "-" + days;
     }
   }
-}
+};
 </script>
 
 <style scoped>
